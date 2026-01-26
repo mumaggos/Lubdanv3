@@ -48,10 +48,10 @@ export default function LayoutNoWeb3({ children }: { children: React.ReactNode }
           scrolled ? "bg-gradient-to-r from-background/95 via-background/90 to-background/95 backdrop-blur-xl border-primary/40 py-0 shadow-lg shadow-primary/10" : "bg-gradient-to-r from-background/80 via-background/70 to-background/80 border-primary/20 py-0 shadow-md shadow-primary/5"
         )}
       >
-        <div className="container flex items-center justify-between">
+        <div className="container flex items-center justify-between py-1">
           <Link href="/">
-            <a className="flex items-center -space-x-8 group">
-              <div className="relative w-16 h-16 coin-spin">
+            <a className="flex items-center -space-x-4 group">
+              <div className="relative w-24 h-24 coin-spin">
                 <img 
                   src="/images/token.png" 
                   alt="Lubdan Coin" 
@@ -61,7 +61,7 @@ export default function LayoutNoWeb3({ children }: { children: React.ReactNode }
               <img 
                 src="/lubdan-logo.png" 
                 alt="Lubdan" 
-                className="h-16 w-auto object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-transform group-hover:scale-105 duration-300" 
+                className="h-28 w-auto object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-transform group-hover:scale-105 duration-300" 
               />
             </a>
           </Link>
