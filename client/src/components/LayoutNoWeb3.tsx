@@ -63,11 +63,6 @@ export default function LayoutNoWeb3({ children }: { children: React.ReactNode }
                   className="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(212,175,55,0.5)] transition-transform group-hover:scale-110 duration-300" 
                 />
               </div>
-              <img 
-                src="/lubdan-logo.png" 
-                alt="Lubdan" 
-                className="h-28 w-auto object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-transform group-hover:scale-105 duration-300" 
-              />
             </a>
           </Link>
 
