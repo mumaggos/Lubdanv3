@@ -44,14 +44,14 @@ export default function LayoutNoWeb3({ children }: { children: React.ReactNode }
       {/* Header */}
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent",
-          scrolled ? "bg-background/80 backdrop-blur-md border-border/30 py-3" : "bg-transparent py-5"
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
+          scrolled ? "bg-gradient-to-r from-background/95 via-background/90 to-background/95 backdrop-blur-xl border-primary/40 py-3 shadow-lg shadow-primary/10" : "bg-gradient-to-r from-background/80 via-background/70 to-background/80 border-primary/20 py-5 shadow-md shadow-primary/5"
         )}
       >
         <div className="container flex items-center justify-between">
           <Link href="/">
             <a className="flex items-center gap-3 group">
-              <div className="relative w-10 h-10">
+              <div className="relative w-10 h-10 coin-spin">
                 <img 
                   src="/images/token.png" 
                   alt="Lubdan Logo" 
