@@ -50,8 +50,8 @@ export default function LayoutNoWeb3({ children }: { children: React.ReactNode }
       >
         <div className="container flex items-center justify-between">
           <Link href="/">
-            <a className="flex items-center -space-x-2 group">
-              <div className="relative w-24 h-24 coin-spin">
+            <a className="flex items-center -space-x-8 group">
+              <div className="relative w-16 h-16 coin-spin">
                 <img 
                   src="/images/token.png" 
                   alt="Lubdan Coin" 
@@ -61,7 +61,7 @@ export default function LayoutNoWeb3({ children }: { children: React.ReactNode }
               <img 
                 src="/lubdan-logo.png" 
                 alt="Lubdan" 
-                className="h-28 w-auto object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-transform group-hover:scale-105 duration-300" 
+                className="h-16 w-auto object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-transform group-hover:scale-105 duration-300" 
               />
             </a>
           </Link>
