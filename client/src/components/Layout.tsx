@@ -65,8 +65,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           scrolled ? "bg-background/80 backdrop-blur-md border-border/30 py-3" : "bg-transparent py-5"
         )}
       >
-        <div className="container flex items-center justify-between">
-          <Link href="/">
+        <div className="mx-auto max-w-6xl w-full flex items-center justify-between px-4">
+         <Link href="/">
             <a className="flex items-center gap-3 group">
               <div className="relative w-10 h-10">
                 <img 
