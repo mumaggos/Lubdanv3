@@ -45,10 +45,10 @@ export default function LayoutNoWeb3({ children }: { children: React.ReactNode }
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-          scrolled ? "bg-gradient-to-r from-background/60 via-background/50 to-background/60 backdrop-blur-md py-0 shadow-lg shadow-primary/5" : "bg-gradient-to-r from-background/40 via-background/30 to-background/40 py-0 shadow-none"
+          scrolled ? "bg-gradient-to-r from-background/10 via-background/5 to-background/10 backdrop-blur-sm py-0 shadow-none" : "bg-gradient-to-r from-background/5 via-background/0 to-background/5 py-0 shadow-none"
         )}
       >
-        <div className="w-full px-4 md:px-12 lg:px-20 flex items-center justify-between py-2 md:py-3">
+        <div className="max-w-5xl mx-auto w-full px-4 flex items-center justify-between py-0">
           <Link href="/">
             <a className="flex items-center -space-x-6 group">
               <div className="relative w-24 h-24 coin-spin">
