@@ -173,7 +173,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <a href="https://t.me/LubdanOfficial" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-primary">
                 <Send size={24} />
               </a>
-              <a href="mailto:lubdan.info@gmail.com" className="text-muted-foreground hover:text-primary">
+              <a href="mailto:info@lubdan.com" className="text-muted-foreground hover:text-primary">
                 <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
               </a>
             </div>
@@ -205,7 +205,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <a href="https://t.me/LubdanOfficial" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all">
                   <Send size={18} />
                 </a>
-                <a href="mailto:lubdan.info@gmail.com" className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all">
+                <a href="mailto:info@lubdan.com" className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all">
                   <Mail size={18} />
                 </a>
               </div>
