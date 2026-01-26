@@ -1,5 +1,8 @@
 {
   "rewrites": [
+    { "source": "/token-info", "destination": "/token-info.html" },
+    { "source": "/tokenomics", "destination": "/tokenomics.html" },
+    { "source": "/roadmap", "destination": "/roadmap.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
