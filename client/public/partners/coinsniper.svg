@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <g transform="translate(100, 100)">
+    <!-- Sniper scope -->
+    <circle cx="0" cy="0" r="60" fill="none" stroke="currentColor" stroke-width="3"/>
+    <circle cx="0" cy="0" r="45" fill="none" stroke="currentColor" stroke-width="2" opacity="0.6"/>
+    <circle cx="0" cy="0" r="30" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+    
+    <!-- Crosshair -->
+    <line x1="-50" y1="0" x2="-35" y2="0" stroke="currentColor" stroke-width="2"/>
+    <line x1="35" y1="0" x2="50" y2="0" stroke="currentColor" stroke-width="2"/>
+    <line x1="0" y1="-50" x2="0" y2="-35" stroke="currentColor" stroke-width="2"/>
+    <line x1="0" y1="35" x2="0" y2="50" stroke="currentColor" stroke-width="2"/>
+    
+    <!-- Center -->
+    <circle cx="0" cy="0" r="5" fill="currentColor"/>
+  </g>
+</svg>

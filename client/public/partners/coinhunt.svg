@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- CoinHunt Logo - Based on official design -->
+  <g transform="translate(100, 100)">
+    <!-- Main circle background -->
+    <circle cx="0" cy="0" r="85" fill="none" stroke="currentColor" stroke-width="2" opacity="0.2"/>
+    
+    <!-- Hexagon shape (core of CoinHunt) -->
+    <path d="M 0,-50 L 43.3,-25 L 43.3,25 L 0,50 L -43.3,25 L -43.3,-25 Z" 
+          fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+    
+    <!-- Inner hexagon -->
+    <path d="M 0,-30 L 26,-15 L 26,15 L 0,30 L -26,15 L -26,-15 Z" 
+          fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    
+    <!-- Center dot -->
+    <circle cx="0" cy="0" r="5" fill="currentColor"/>
+    
+    <!-- Decorative rings -->
+    <circle cx="0" cy="0" r="40" fill="none" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+    <circle cx="0" cy="0" r="60" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+  </g>
+</svg>

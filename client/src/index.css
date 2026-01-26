@@ -1,0 +1,343 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Cinzel Decorative", serif;
+  --font-body: "Rajdhani", sans-serif;
+  --font-sans: "Rajdhani", sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  /* Default to Dark Mode values since this is a dark-themed site */
+  --background: oklch(0.05 0.01 140); /* #0a1f0a - Deep Forest Dark */
+  --foreground: oklch(0.95 0.02 140); /* Off-white with slight green tint */
+  
+  --card: oklch(0.1 0.02 140 / 0.7); /* Glassmorphism dark card */
+  --card-foreground: oklch(0.95 0.02 140);
+  
+  --popover: oklch(0.08 0.02 140);
+  --popover-foreground: oklch(0.95 0.02 140);
+  
+  --primary: oklch(0.85 0.15 85); /* #D4AF37 - Metallic Gold */
+  --primary-foreground: oklch(0.1 0.05 140);
+  
+  --secondary: oklch(0.7 0.2 140); /* #00FF41 - Neon Emerald Green */
+  --secondary-foreground: oklch(0.05 0.01 140);
+  
+  --muted: oklch(0.2 0.03 140);
+  --muted-foreground: oklch(0.7 0.05 140);
+  
+  --accent: oklch(0.2 0.05 140);
+  --accent-foreground: oklch(0.95 0.02 140);
+  
+  --destructive: oklch(0.6 0.2 20);
+  --destructive-foreground: oklch(0.98 0 0);
+  
+  --border: oklch(0.85 0.15 85 / 0.3); /* Gold border with transparency */
+  --input: oklch(0.2 0.03 140);
+  --ring: oklch(0.7 0.2 140); /* Neon Green Ring */
+  
+  --radius: 0.5rem;
+  
+  --chart-1: oklch(0.85 0.15 85); /* Gold */
+  --chart-2: oklch(0.7 0.2 140); /* Neon Green */
+  --chart-3: oklch(0.6 0.15 160);
+  --chart-4: oklch(0.5 0.1 140);
+  --chart-5: oklch(0.4 0.05 140);
+  
+  --sidebar: oklch(0.05 0.01 140);
+  --sidebar-foreground: oklch(0.95 0.02 140);
+  --sidebar-primary: oklch(0.85 0.15 85);
+  --sidebar-primary-foreground: oklch(0.1 0.05 140);
+  --sidebar-accent: oklch(0.1 0.02 140);
+  --sidebar-accent-foreground: oklch(0.95 0.02 140);
+  --sidebar-border: oklch(0.85 0.15 85 / 0.2);
+  --sidebar-ring: oklch(0.7 0.2 140);
+}
+
+.dark {
+  /* Same as root since we are dark-first */
+  --background: oklch(0.05 0.01 140);
+  --foreground: oklch(0.95 0.02 140);
+  --card: oklch(0.1 0.02 140 / 0.7);
+  --card-foreground: oklch(0.95 0.02 140);
+  --popover: oklch(0.08 0.02 140);
+  --popover-foreground: oklch(0.95 0.02 140);
+  --primary: oklch(0.85 0.15 85);
+  --primary-foreground: oklch(0.1 0.05 140);
+  --secondary: oklch(0.7 0.2 140);
+  --secondary-foreground: oklch(0.05 0.01 140);
+  --muted: oklch(0.2 0.03 140);
+  --muted-foreground: oklch(0.7 0.05 140);
+  --accent: oklch(0.2 0.05 140);
+  --accent-foreground: oklch(0.95 0.02 140);
+  --destructive: oklch(0.6 0.2 20);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.85 0.15 85 / 0.3);
+  --input: oklch(0.2 0.03 140);
+  --ring: oklch(0.7 0.2 140);
+  --sidebar: oklch(0.05 0.01 140);
+  --sidebar-foreground: oklch(0.95 0.02 140);
+  --sidebar-primary: oklch(0.85 0.15 85);
+  --sidebar-primary-foreground: oklch(0.1 0.05 140);
+  --sidebar-accent: oklch(0.1 0.02 140);
+  --sidebar-accent-foreground: oklch(0.95 0.02 140);
+  --sidebar-border: oklch(0.85 0.15 85 / 0.2);
+  --sidebar-ring: oklch(0.7 0.2 140);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    background-image: 
+      radial-gradient(circle at 50% 0%, oklch(0.7 0.2 140 / 0.15), transparent 50%),
+      radial-gradient(circle at 0% 50%, oklch(0.85 0.15 85 / 0.1), transparent 40%),
+      radial-gradient(circle at 100% 50%, oklch(0.85 0.15 85 / 0.1), transparent 40%);
+    background-attachment: fixed;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-wide;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: 1280px;
+    }
+  }
+  
+  /* Custom Glassmorphism Card */
+  .glass-card {
+    @apply bg-card/60 backdrop-blur-md border border-border/50 shadow-lg shadow-primary/5;
+  }
+  
+  /* Glass utility (legacy support) */
+  .glass {
+    @apply bg-black/40 backdrop-blur-xl border border-primary/30 shadow-xl;
+  }
+  
+  /* Neon Text Effect */
+  .text-neon {
+    text-shadow: 0 0 10px oklch(0.7 0.2 140 / 0.5), 0 0 20px oklch(0.7 0.2 140 / 0.3);
+  }
+  
+  /* Gold Text Effect */
+  .text-gold-glow {
+    text-shadow: 0 0 10px oklch(0.85 0.15 85 / 0.5);
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 20px oklch(0.85 0.15 85 / 0.5);
+  }
+  
+  .neon-border {
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2), inset 0 0 20px rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+  }
+  
+  .gold-text {
+    background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+  }
+}
+
+/* Custom Fonts */
+@font-face {
+  font-family: 'Cinzel Decorative';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/cinzeldecorative/v16/daaCSScvJGqLYhG8nNt8KPPswUAPnh7URs1LaCyC.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Rajdhani';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/rajdhani/v15/LDIxapCSOBg7S-QT7pasEfOqeef0kg.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/cinzel/v19/8vIJ7ww63mVu7gt79PT7.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hjp-Ek-_EeA.woff2) format('woff2');
+}
+
+/* Marquee Animation for running leprechaun */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+/* Lubdan Title Styling */
+.lubdan-title {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 25%, #FFD700 50%, #FFA500 75%, #FFD700 100%);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 4s ease infinite;
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+  filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.3));
+  letter-spacing: 0.15em;
+  font-weight: 900;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.lubdan-title-glow {
+  position: relative;
+  display: inline-block;
+}
+
+.lubdan-title-glow::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 25%, #FFD700 50%, #FFA500 75%, #FFD700 100%);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 4s ease infinite;
+  filter: blur(10px) brightness(1.2);
+  opacity: 0.6;
+}
+
+.lubdan-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.lubdan-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
