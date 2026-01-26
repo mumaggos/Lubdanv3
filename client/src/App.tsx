@@ -1,7 +1,4 @@
 import { Toaster } from "@/components/ui/sonner";
-import { WagmiProvider } from 'wagmi';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { config } from './lib/wagmi';
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
@@ -9,34 +6,73 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { LoadingFallback } from "./components/LoadingFallback";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
+import SocialFloatingButtons from "./components/SocialFloatingButtons";
+import { Suspense, lazy, useMemo } from "react";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Web3Wrapper } from "./components/Web3Wrapper";
 import Home from "./pages/Home";
-import Admin from "./pages/Admin";
-import Presale from "./pages/Presale";
-import Dashboard from "./pages/Dashboard";
-import Dividends from "./pages/Dividends";
 import Roadmap from "./pages/Roadmap";
 import FAQ from "./pages/FAQ";
 import Whitepaper from "./pages/Whitepaper";
 import Tokenomics from "./pages/Tokenomics";
-import SocialFloatingButtons from "./components/SocialFloatingButtons";
-import { Suspense } from "react";
 
+// Lazy load pages that require Web3
+const Presale = lazy(() => import("./pages/Presale"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Dividends = lazy(() => import("./pages/Dividends"));
+const Admin = lazy(() => import("./pages/Admin"));
 
-function Router() {
+function Router({ queryClient }: { queryClient: QueryClient }) {
   return (
     <>
       <Switch>
+        {/* Non-Web3 routes */}
         <Route path={"/"} component={Home} />
-        <Route path={"/presale"} component={Presale} />
-        <Route path={"/dashboard"} component={Dashboard} />
-        <Route path={"/dividends"} component={Dividends} />
         <Route path={"/roadmap"} component={Roadmap} />
         <Route path={"/faq"} component={FAQ} />
         <Route path={"/whitepaper"} component={Whitepaper} />
         <Route path={"/tokenomics"} component={Tokenomics} />
-        <Route path={"/admin"} component={Admin} />
+        
+        {/* Web3 routes - wrapped with Suspense and Web3Wrapper */}
+        <Route path={"/presale"}>
+          {() => (
+            <Suspense fallback={<LoadingFallback />}>
+              <Web3Wrapper queryClient={queryClient}>
+                <Presale />
+              </Web3Wrapper>
+            </Suspense>
+          )}
+        </Route>
+        <Route path={"/dashboard"}>
+          {() => (
+            <Suspense fallback={<LoadingFallback />}>
+              <Web3Wrapper queryClient={queryClient}>
+                <Dashboard />
+              </Web3Wrapper>
+            </Suspense>
+          )}
+        </Route>
+        <Route path={"/dividends"}>
+          {() => (
+            <Suspense fallback={<LoadingFallback />}>
+              <Web3Wrapper queryClient={queryClient}>
+                <Dividends />
+              </Web3Wrapper>
+            </Suspense>
+          )}
+        </Route>
+        <Route path={"/admin"}>
+          {() => (
+            <Suspense fallback={<LoadingFallback />}>
+              <Web3Wrapper queryClient={queryClient}>
+                <Admin />
+              </Web3Wrapper>
+            </Suspense>
+          )}
+        </Route>
+        
+        {/* Fallback routes */}
         <Route path={"/404"} component={NotFound} />
-        {/* Final fallback route */}
         <Route component={NotFound} />
       </Switch>
       <SocialFloatingButtons />
@@ -49,29 +85,26 @@ function Router() {
 //   to keep consistent foreground/background color across components
 // - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 1000 * 60 * 5, // 5 minutes
-      gcTime: 1000 * 60 * 10, // 10 minutes (formerly cacheTime)
-    },
-  },
-});
-
 function App() {
+  // Create QueryClient once and reuse it
+  const queryClient = useMemo(() => new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 1000 * 60 * 5, // 5 minutes
+        gcTime: 1000 * 60 * 10, // 10 minutes (formerly cacheTime)
+      },
+    },
+  }), []);
+
   return (
     <ErrorBoundary>
       <Suspense fallback={<LoadingFallback />}>
         <ThemeProvider defaultTheme="dark" storageKey="lubdan-theme">
           <LanguageProvider>
-            <WagmiProvider config={config}>
-              <QueryClientProvider client={queryClient}>
-                <TooltipProvider>
-                  <Toaster />
-                  <Router />
-                </TooltipProvider>
-              </QueryClientProvider>
-            </WagmiProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Router queryClient={queryClient} />
+            </TooltipProvider>
           </LanguageProvider>
         </ThemeProvider>
       </Suspense>

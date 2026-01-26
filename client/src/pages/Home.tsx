@@ -1,7 +1,6 @@
 import LayoutNoWeb3 from "@/components/LayoutNoWeb3";
 import Mascot3D from "@/components/Mascot3D";
 import { Button } from "@/components/ui/button";
-import { usePresaleData } from "@/hooks/usePresale";
 import { motion } from "framer-motion";
 import { ArrowRight, ShieldCheck, TrendingUp, Coins, Zap } from "lucide-react";
 import { Link } from "wouter";
@@ -12,7 +11,10 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Home() {
   const { t } = useLanguage();
-  const { currentPhase, totalSold, phase1Remaining } = usePresaleData();
+  
+  // Use mock data for homepage - actual presale data is fetched on /presale page
+  const currentPhase = 1;
+  const totalSold = 0; // Mock value
   
   // Calculate progress (mock logic if data is 0/loading)
   const totalPresale = 9450000;
