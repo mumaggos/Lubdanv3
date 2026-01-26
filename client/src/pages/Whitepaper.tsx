@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import LayoutNoWeb3 from "@/components/LayoutNoWeb3";
 import { motion } from "framer-motion";
 import { ArrowLeft, Download, FileText, Share2 } from "lucide-react";
 import { Link } from "wouter";
@@ -107,7 +107,7 @@ export default function Whitepaper() {
   };
 
   return (
-    <Layout>
+    <LayoutNoWeb3>
       {/* Header Section */}
       <section className="relative py-20 border-b border-border/30">
         <div className="container mx-auto px-4">
@@ -253,6 +253,6 @@ export default function Whitepaper() {
           </motion.div>
         </div>
       </section>
-    </Layout>
+    </LayoutNoWeb3>
   );
 }

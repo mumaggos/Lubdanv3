@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import LayoutNoWeb3 from "@/components/LayoutNoWeb3";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -13,7 +13,7 @@ export default function FAQ() {
   const [showLegalDisclosures, setShowLegalDisclosures] = useState(false);
   
   return (
-    <Layout>
+    <LayoutNoWeb3>
       <div className="min-h-screen pt-20 pb-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -113,7 +113,7 @@ export default function FAQ() {
           </div>
         </div>
       </div>
-    </Layout>
+    </LayoutNoWeb3>
   );
 }
 

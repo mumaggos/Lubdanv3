@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
-import Layout from "@/components/Layout";
+import LayoutNoWeb3 from "@/components/LayoutNoWeb3";
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 // Supply Distribution Data
@@ -41,7 +41,7 @@ export default function Tokenomics() {
   };
 
   return (
-    <Layout>
+    <LayoutNoWeb3>
       <div className="min-h-screen pt-24 pb-16">
         <div className="container mx-auto px-4">
           {/* Header */}
@@ -302,6 +302,6 @@ export default function Tokenomics() {
           </motion.section>
         </div>
       </div>
-    </Layout>
+    </LayoutNoWeb3>
   );
 }

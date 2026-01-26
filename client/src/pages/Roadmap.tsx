@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import LayoutNoWeb3 from "@/components/LayoutNoWeb3";
 import { motion } from "framer-motion";
 import { CheckCircle2, Circle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -7,7 +7,7 @@ export default function Roadmap() {
   const { t } = useLanguage();
 
   return (
-    <Layout>
+    <LayoutNoWeb3>
       <div className="min-h-screen pt-20 pb-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-20">
@@ -87,7 +87,7 @@ export default function Roadmap() {
           </div>
         </div>
       </div>
-    </Layout>
+    </LayoutNoWeb3>
   );
 }
 
