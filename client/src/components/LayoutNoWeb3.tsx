@@ -50,7 +50,12 @@ export default function LayoutNoWeb3({ children }: { children: React.ReactNode }
       >
         <div className="container flex items-center justify-between py-0">
           <Link href="/">
-            <a className="flex items-center -space-x-8 group">
+            <a className="flex items-center -space-x-6 group">
+              <img 
+                src="/lubdan-text.png" 
+                alt="Lubdan Text" 
+                className="h-14 w-auto object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-transform group-hover:scale-105 duration-300" 
+              />
               <div className="relative w-24 h-24 coin-spin">
                 <img 
                   src="/images/token.png" 
