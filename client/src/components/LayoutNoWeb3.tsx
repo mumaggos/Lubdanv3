@@ -48,7 +48,7 @@ export default function LayoutNoWeb3({ children }: { children: React.ReactNode }
           scrolled ? "bg-gradient-to-r from-background/15 via-background/12 to-background/15 backdrop-blur-sm py-0 shadow-none" : "bg-gradient-to-r from-background/12 via-background/8 to-background/12 py-0 shadow-none"
         )}
       >
-        <div className="max-w-3xl mx-auto w-full px-4 flex items-center justify-between py-0">
+        <div className="mx-auto max-w-6xl w-full flex items-center justify-between px-4"> 
           <Link href="/">
             <a className="flex items-center -space-x-6 group">
               <div className="relative w-24 h-24 coin-spin">
