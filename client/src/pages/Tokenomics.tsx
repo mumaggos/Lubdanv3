@@ -42,8 +42,8 @@ export default function Tokenomics() {
 
   return (
     <LayoutNoWeb3>
-      <div className="min-h-screen pt-24 pb-16">
-        <div className="container mx-auto px-4">
+      <div className="mx-auto max-w-6xl px-4">
+         <div className="container mx-auto px-4">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -53,7 +53,7 @@ export default function Tokenomics() {
             <h1 className="text-4xl md:text-5xl font-display font-bold mb-4 text-foreground">
               {t('tokenomics.title')}
             </h1>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-4xl mx-auto">
               {t('tokenomics.subtitle')}
             </p>
           </motion.div>
@@ -249,8 +249,8 @@ export default function Tokenomics() {
               <h2 className="text-2xl md:text-3xl font-display font-bold mb-6 text-foreground text-center">
                 {t('tokenomics.casino.title')}
               </h2>
-              <p className="text-muted-foreground text-center mb-8 max-w-3xl mx-auto">
-                {t('tokenomics.casino.description')}
+              <p className="text-muted-foreground text-center mb-8 max-w-4xl mx-auto">
+                 {t('tokenomics.casino.description')}
               </p>
 
               {/* Casino Revenue Pie Chart */}
