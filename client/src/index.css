@@ -54,7 +54,7 @@
   --background: #1B1026;
   --foreground: #F5F5F5;
   
-  --card: rgba(46, 28, 77, 0.5);
+  --card: #2E1C4D;
   --card-foreground: #F5F5F5;
   
   --popover: #24143A;
@@ -75,7 +75,7 @@
   --destructive: #FF6B6B;
   --destructive-foreground: #FFFFFF;
   
-  --border: rgba(245, 195, 106, 0.2);
+  --border: #E6B85C;
   --input: #24143A;
   --ring: #F5C36A;
   
@@ -93,7 +93,7 @@
   --sidebar-primary-foreground: #1B1026;
   --sidebar-accent: #2E1C4D;
   --sidebar-accent-foreground: #F5F5F5;
-  --sidebar-border: rgba(245, 195, 106, 0.2);
+  --sidebar-border: #E6B85C;
   --sidebar-ring: #F5C36A;
 }
 
@@ -101,7 +101,7 @@
   /* Cosmic Purple + Luxury Gold Theme */
   --background: #1B1026;
   --foreground: #F5F5F5;
-  --card: rgba(46, 28, 77, 0.5);
+  --card: #2E1C4D;
   --card-foreground: #F5F5F5;
   --popover: #24143A;
   --popover-foreground: #F5F5F5;
@@ -115,7 +115,7 @@
   --accent-foreground: #F5F5F5;
   --destructive: #FF6B6B;
   --destructive-foreground: #FFFFFF;
-  --border: rgba(245, 195, 106, 0.2);
+  --border: #E6B85C;
   --input: #24143A;
   --ring: #F5C36A;
   --sidebar: #0B0A10;
@@ -124,7 +124,7 @@
   --sidebar-primary-foreground: #1B1026;
   --sidebar-accent: #2E1C4D;
   --sidebar-accent-foreground: #F5F5F5;
-  --sidebar-border: rgba(245, 195, 106, 0.2);
+  --sidebar-border: #E6B85C;
   --sidebar-ring: #F5C36A;
 }
 
@@ -199,12 +199,12 @@
   
   /* Custom Glassmorphism Card */
   .glass-card {
-    @apply bg-card/60 backdrop-blur-md border border-border/50 shadow-lg shadow-primary/5;
+    @apply bg-card backdrop-blur-md border border-border shadow-lg shadow-primary/5;
   }
   
   /* Glass utility (legacy support) */
   .glass {
-    @apply bg-black/40 backdrop-blur-xl border border-primary/30 shadow-xl;
+    @apply bg-muted backdrop-blur-xl border border-primary shadow-xl;
   }
   
   /* Purple Glow Text Effect */
