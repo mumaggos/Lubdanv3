@@ -3,7 +3,7 @@ export const tokenInfo = {
   projectName: 'Lubdan',
   ticker: 'LBD',
   network: 'Polygon',
-  shortDescription: 'A long-term Polygon project designed for sustainability, transparency, and real MATIC dividends.',
+  shortDescription: 'A long-term Polygon-based project focused on transparency, sustainability, and on-chain value distribution.',
   
   // Contract Addresses
   tokenContractAddress: '0x7dd400E9141e3df10Fb24CcdE9B116C334F9542e',
@@ -64,9 +64,14 @@ export const tokenInfo = {
   // Roadmap
   roadmap: [
     {
-      milestone: 'Presale Launch',
-      description: 'Initial token presale begins',
+      milestone: 'Presale Phase 1 Launch',
+      description: 'Initial presale phase started',
       status: 'completed'
+    },
+    {
+      milestone: 'Presale Ongoing',
+      description: 'Public token presale currently active',
+      status: 'in-progress'
     },
     {
       milestone: 'DEX Listing',
@@ -91,5 +96,8 @@ export const tokenInfo = {
   ],
   
   // Disclaimer
-  disclaimer: 'Lubdan (LBD) is a utility token on the Polygon network. It is not a security or equity stake in any company. This project is subject to market risks and regulatory changes. Always conduct your own research before investing.'
+  disclaimer: 'Lubdan (LBD) is a utility token on the Polygon network and does not represent equity, ownership, or profit rights in any company. This project is subject to market risks and regulatory changes. Always conduct your own research before participating.',
+  
+  // Footer year
+  copyrightYear: 2026
 };

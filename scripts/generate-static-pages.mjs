@@ -174,7 +174,7 @@ ${JSON.stringify(jsonLd, null, 2)}
     </div>
     
     <div class="footer">
-      <p>© 2024 Lubdan. All rights reserved. | <a href="https://www.lubdan.com">Back to Website</a></p>
+      <p>© 2026 Lubdan. All rights reserved. | <a href="https://www.lubdan.com">Back to Website</a></p>
     </div>
   </div>
 </body>
