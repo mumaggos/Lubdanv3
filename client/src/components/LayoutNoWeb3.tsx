@@ -45,10 +45,10 @@ export default function LayoutNoWeb3({ children }: { children: React.ReactNode }
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
-          scrolled ? "bg-gradient-to-r from-background/98 via-background/95 to-background/98 backdrop-blur-xl border-transparent py-0 shadow-lg shadow-primary/5" : "bg-gradient-to-r from-background/90 via-background/85 to-background/90 border-transparent py-0 shadow-none"
+          scrolled ? "bg-gradient-to-r from-background/60 via-background/50 to-background/60 backdrop-blur-md border-transparent py-0 shadow-lg shadow-primary/5" : "bg-gradient-to-r from-background/40 via-background/30 to-background/40 border-transparent py-0 shadow-none"
         )}
       >
-        <div className="container flex items-center justify-between py-0">
+        <div className="max-w-6xl mx-auto px-4 flex items-center justify-between py-0">
           <Link href="/">
             <a className="flex items-center -space-x-6 group">
               <div className="relative w-24 h-24 coin-spin">
@@ -202,6 +202,11 @@ export default function LayoutNoWeb3({ children }: { children: React.ReactNode }
                 <li>
                   <Link href="/whitepaper">
                     <a className="text-muted-foreground hover:text-primary transition-colors">{t('nav.whitepaper')}</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/roadmap">
+                    <a className="text-muted-foreground hover:text-primary transition-colors">{t('nav.roadmap')}</a>
                   </Link>
                 </li>
                 <li>
