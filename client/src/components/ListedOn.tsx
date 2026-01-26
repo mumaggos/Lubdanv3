@@ -39,30 +39,18 @@ const listings: ListingItem[] = [
 export default function ListedOn() {
   const { t } = useLanguage();
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: { opacity: 1, y: 0 },
-  };
+  // Duplicar para criar efeito infinito
+  const duplicatedListings = [...listings, ...listings];
 
   return (
-    <section className="py-16 relative">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
+    <section className="py-20 relative overflow-hidden bg-gradient-to-r from-background/50 via-background/30 to-background/50 border-y border-primary/10">
+      <div className="container mx-auto px-4 mb-12">
+        <div className="text-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-2xl md:text-3xl font-display font-bold mb-2 text-foreground"
+            className="text-3xl md:text-4xl font-display font-bold mb-3 bg-gradient-to-r from-primary via-primary to-primary/80 bg-clip-text text-transparent"
           >
             {t('home.listed_on.title') || 'Listed On'}
           </motion.h2>
@@ -71,26 +59,30 @@ export default function ListedOn() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-muted-foreground"
+            className="text-lg text-muted-foreground max-w-2xl mx-auto"
           >
             {t('home.listed_on.subtitle') || 'Discover Lubdan on major crypto platforms'}
           </motion.p>
         </div>
+      </div>
 
+      {/* Carrossel Animado */}
+      <div className="relative w-full overflow-hidden">
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8 items-center justify-center"
+          className="flex gap-8 md:gap-12"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{
+            duration: 30,
+            repeat: Infinity,
+            ease: "linear",
+          }}
         >
-          {listings.map((item) => (
+          {duplicatedListings.map((item, index) => (
             <motion.div
-              key={item.name}
-              variants={itemVariants}
-              className={`flex flex-col items-center justify-center group ${
-                item.isComingSoon ? "cursor-not-allowed" : "cursor-pointer"
-              }`}
+              key={`${item.name}-${index}`}
+              className="flex-shrink-0 w-32 md:w-40 flex flex-col items-center justify-center group"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
             >
               {item.link && !item.isComingSoon ? (
                 <a
@@ -99,31 +91,31 @@ export default function ListedOn() {
                   rel="noopener noreferrer"
                   className="flex flex-col items-center justify-center w-full transition-all duration-300"
                 >
-                  <div className="relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center mb-3 transition-all duration-300 group-hover:scale-110">
+                  <div className="relative w-24 h-24 md:w-28 md:h-28 flex items-center justify-center mb-4 p-4 rounded-2xl bg-gradient-to-br from-primary/5 to-secondary/5 border border-primary/20 group-hover:border-primary/50 group-hover:shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-all duration-300">
                     <img
                       src={item.logo}
                       alt={item.name}
-                      className="w-full h-full object-contain opacity-70 group-hover:opacity-100 transition-opacity duration-300 text-foreground"
+                      className="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300 filter drop-shadow-[0_0_8px_rgba(212,175,55,0.2)]"
                     />
                   </div>
-                  <span className="text-xs md:text-sm font-medium text-foreground text-center">
+                  <span className="text-sm md:text-base font-semibold text-foreground text-center group-hover:text-primary transition-colors">
                     {item.name}
                   </span>
                 </a>
               ) : (
                 <div className="flex flex-col items-center justify-center w-full">
-                  <div className="relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center mb-3 opacity-40">
+                  <div className="relative w-24 h-24 md:w-28 md:h-28 flex items-center justify-center mb-4 p-4 rounded-2xl bg-gradient-to-br from-primary/5 to-secondary/5 border border-primary/10 opacity-50">
                     <img
                       src={item.logo}
                       alt={item.name}
-                      className="w-full h-full object-contain text-foreground"
+                      className="w-full h-full object-contain opacity-50"
                     />
                   </div>
-                  <div className="flex flex-col items-center gap-1">
-                    <span className="text-xs md:text-sm font-medium text-foreground text-center opacity-60">
+                  <div className="flex flex-col items-center gap-2">
+                    <span className="text-sm md:text-base font-semibold text-foreground text-center opacity-60">
                       {item.name}
                     </span>
-                    <span className="text-xs text-secondary opacity-70 font-semibold">
+                    <span className="text-xs text-primary font-bold uppercase tracking-wider opacity-70 bg-primary/10 px-3 py-1 rounded-full">
                       {t('home.listed_on.coming_soon') || 'Coming Soon'}
                     </span>
                   </div>
@@ -132,6 +124,10 @@ export default function ListedOn() {
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Gradientes nas extremidades */}
+        <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-background via-background/50 to-transparent pointer-events-none" />
+        <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-background via-background/50 to-transparent pointer-events-none" />
       </div>
     </section>
   );

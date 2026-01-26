@@ -141,7 +141,11 @@
     background-attachment: fixed;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-wide;
+    @apply font-display tracking-wide text-foreground;
+    text-shadow: 0 0 20px rgba(245, 195, 106, 0.1);
+  }
+  p, span, a {
+    @apply text-foreground/90;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
@@ -153,6 +157,14 @@
   input[type="checkbox"]:not(:disabled),
   input[type="radio"]:not(:disabled) {
     @apply cursor-pointer;
+  }
+  
+  /* Premium Button Styles */
+  button, [role="button"] {
+    @apply transition-all duration-300;
+  }
+  button:hover:not(:disabled) {
+    @apply scale-105 shadow-lg;
   }
 }
 
