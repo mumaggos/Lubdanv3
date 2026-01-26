@@ -17,7 +17,7 @@ const listings: ListingItem[] = [
   {
     name: "CoinSniper",
     logo: "/partners/coinsniper.png",
-    isComingSoon: true,
+    link: "https://coinsniper.net/coin/89369",
   },
   {
     name: "PolygonScan",
@@ -63,7 +63,7 @@ export default function ListedOn() {
         </div>
 
         {/* Grid de Imagens Fixas */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
           {listings.map((item, index) => (
             <motion.div
               key={`${item.name}-${index}`}
@@ -81,7 +81,7 @@ export default function ListedOn() {
                   className="flex flex-col items-center justify-center w-full transition-all duration-300"
                 >
                   <motion.div
-                    className="relative w-28 h-28 md:w-32 md:h-32 flex items-center justify-center mb-4 p-6 rounded-3xl bg-gradient-to-br from-primary/15 to-secondary/15 border-2 border-primary/40 group-hover:border-primary/80 group-hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] group-hover:from-primary/25 group-hover:to-secondary/25 transition-all duration-300"
+                    className="relative w-20 h-20 md:w-24 md:h-24 flex items-center justify-center mb-3 p-4 rounded-2xl bg-gradient-to-br from-primary/15 to-secondary/15 border-2 border-primary/40 group-hover:border-primary/80 group-hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] group-hover:from-primary/25 group-hover:to-secondary/25 transition-all duration-300"
                     whileHover={{ scale: 1.1, y: -10 }}
                   >
                     <img
@@ -99,7 +99,7 @@ export default function ListedOn() {
                   className="flex flex-col items-center justify-center w-full"
                   whileHover={{ scale: 1.05 }}
                 >
-                  <div className="relative w-28 h-28 md:w-32 md:h-32 flex items-center justify-center mb-4 p-6 rounded-3xl bg-gradient-to-br from-primary/10 to-secondary/10 border-2 border-primary/20">
+                  <div className="relative w-20 h-20 md:w-24 md:h-24 flex items-center justify-center mb-3 p-4 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 border-2 border-primary/20">
                     <img
                       src={item.logo}
                       alt={item.name}
