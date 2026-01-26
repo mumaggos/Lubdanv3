@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
+import { LoadingFallback } from "./components/LoadingFallback";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import Home from "./pages/Home";
@@ -18,7 +19,7 @@ import FAQ from "./pages/FAQ";
 import Whitepaper from "./pages/Whitepaper";
 import Tokenomics from "./pages/Tokenomics";
 import SocialFloatingButtons from "./components/SocialFloatingButtons";
-
+import { Suspense } from "react";
 
 
 function Router() {
@@ -48,23 +49,32 @@ function Router() {
 //   to keep consistent foreground/background color across components
 // - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      gcTime: 1000 * 60 * 10, // 10 minutes (formerly cacheTime)
+    },
+  },
+});
 
 function App() {
   return (
     <ErrorBoundary>
-      <LanguageProvider>
-        <WagmiProvider config={config}>
-          <QueryClientProvider client={queryClient}>
-            <ThemeProvider defaultTheme="dark" storageKey="lubdan-theme">
-              <TooltipProvider>
-                <Toaster />
-                <Router />
-              </TooltipProvider>
-            </ThemeProvider>
-          </QueryClientProvider>
-        </WagmiProvider>
-      </LanguageProvider>
+      <Suspense fallback={<LoadingFallback />}>
+        <ThemeProvider defaultTheme="dark" storageKey="lubdan-theme">
+          <LanguageProvider>
+            <WagmiProvider config={config}>
+              <QueryClientProvider client={queryClient}>
+                <TooltipProvider>
+                  <Toaster />
+                  <Router />
+                </TooltipProvider>
+              </QueryClientProvider>
+            </WagmiProvider>
+          </LanguageProvider>
+        </ThemeProvider>
+      </Suspense>
     </ErrorBoundary>
   );
 }

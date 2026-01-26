@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Mail, CheckCircle, AlertCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { safeStorage } from "@/lib/storage";
 
 export default function Newsletter() {
   const { t } = useLanguage();
@@ -45,17 +46,13 @@ export default function Newsletter() {
         setEmail("");
         
         // Also save to local storage as backup
-        try {
-          const subscribers = JSON.parse(localStorage.getItem("lubdan_subscribers") || "[]");
-          subscribers.push({
-            email,
-            subscribedAt: new Date().toISOString(),
-            id: Math.random().toString(36).substr(2, 9)
-          });
-          localStorage.setItem("lubdan_subscribers", JSON.stringify(subscribers));
-        } catch (e) {
-          console.error("Failed to save to localStorage", e);
-        }
+        const subscribers = JSON.parse(safeStorage.getItem("lubdan_subscribers") || "[]");
+        subscribers.push({
+          email,
+          subscribedAt: new Date().toISOString(),
+          id: Math.random().toString(36).substr(2, 9)
+        });
+        safeStorage.setItem("lubdan_subscribers", JSON.stringify(subscribers));
         
         setTimeout(() => setStatus("idle"), 3000);
       } else {

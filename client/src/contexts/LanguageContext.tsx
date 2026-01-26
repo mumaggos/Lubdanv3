@@ -6,6 +6,7 @@ import de from '../i18n/de.json';
 import zh from '../i18n/zh.json';
 import ja from '../i18n/ja.json';
 import ko from '../i18n/ko.json';
+import { safeStorage } from '../lib/storage';
 
 export type Language = 'en' | 'pt' | 'fr' | 'de' | 'zh' | 'ja' | 'ko';
 
@@ -28,7 +29,7 @@ const translations: Record<Language, Record<string, string>> = {
 };
 
 const getDefaultLanguage = (): Language => {
-  const savedLanguage = localStorage.getItem('language') as Language | null;
+  const savedLanguage = safeStorage.getItem('language') as Language | null;
   if (savedLanguage && translations[savedLanguage]) {
     return savedLanguage;
   }
@@ -56,13 +57,13 @@ const getDefaultLanguage = (): Language => {
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [language, setLanguage] = useState<Language>(getDefaultLanguage);
   useEffect(() => {
-    const savedLanguage = localStorage.getItem('language') as Language | null;
+    const savedLanguage = safeStorage.getItem('language') as Language | null;
     if (savedLanguage && translations[savedLanguage]) {
       setLanguage(savedLanguage);
     } else if (!savedLanguage) {
       const defaultLang = getDefaultLanguage();
       setLanguage(defaultLang);
-      localStorage.setItem('language', defaultLang);
+      safeStorage.setItem('language', defaultLang);
     }
   }, []);
   const t = (key: string): string => {
@@ -71,7 +72,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
   const handleSetLanguage = (lang: Language) => {
     setLanguage(lang);
-    localStorage.setItem('language', lang);
+    safeStorage.setItem('language', lang);
   };
   return (
     <LanguageContext.Provider value={{ language, setLanguage: handleSetLanguage, t }}>
@@ -83,6 +84,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 export const useLanguage = (): LanguageContextType => {
   const context = useContext(LanguageContext);
   if (!context) {
+    console.error('useLanguage must be used within a LanguageProvider');
     throw new Error('useLanguage must be used within a LanguageProvider');
   }
   return context;

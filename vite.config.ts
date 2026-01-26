@@ -56,8 +56,7 @@ export default defineConfig({
       "127.0.0.1",
     ],
     fs: {
-      strict: true,
-      deny: ["**.*"],
+      strict: false,
     },
     headers: {
       'Cache-Control': 'public, max-age=31536000',
