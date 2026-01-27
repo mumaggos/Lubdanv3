@@ -16,7 +16,7 @@ export default function Mascot3D() {
         className="relative w-full h-full"
       >
         <img 
-          src="/leprechaun-lubdan.png" 
+          src="/leprechaun-lubdan.avif" 
           alt="Lubdan Mascot" 
           className="relative w-full h-full object-contain z-20"
         />
