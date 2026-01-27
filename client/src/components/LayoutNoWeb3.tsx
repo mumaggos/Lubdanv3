@@ -44,25 +44,23 @@ export default function LayoutNoWeb3({ children }: { children: React.ReactNode }
       {/* Header */}
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-          scrolled ? "bg-gradient-to-r from-background/15 via-background/12 to-background/15 backdrop-blur-sm py-0 shadow-none" : "bg-gradient-to-r from-background/12 via-background/8 to-background/12 py-0 shadow-none"
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent",
+          scrolled ? "bg-background/80 backdrop-blur-md border-border/30 py-3" : "bg-transparent py-5"
         )}
       >
-        <div className="mx-auto max-w-6xl w-full flex items-center justify-between px-4"> 
-          <Link href="/">
-            <a className="flex items-center -space-x-6 group">
-              <div className="relative w-24 h-24 coin-spin">
+        <div className="mx-auto max-w-6xl w-full flex items-center justify-between px-4">
+         <Link href="/">
+            <a className="flex items-center gap-3 group">
+              <div className="relative w-10 h-10">
                 <img 
                   src="/images/token.png" 
-                  alt="Lubdan Coin" 
-                  className="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(212,175,55,0.5)] transition-transform group-hover:scale-110 duration-300" 
+                  alt="Lubdan Logo" 
+                  className="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(212,175,55,0.5)] transition-transform group-hover:scale-110 duration-300 scale-150" 
                 />
               </div>
-              <img 
-                src="/lubdan-header.png" 
-                alt="Lubdan" 
-                className="h-32 w-auto object-contain drop-shadow-[0_0_20px_rgba(212,175,55,0.5)] transition-transform group-hover:scale-110 duration-300" 
-              />
+              <span className="font-display text-2xl font-bold text-primary tracking-wider group-hover:text-primary/80 transition-colors">
+                LUBDAN
+              </span>
             </a>
           </Link>
 
