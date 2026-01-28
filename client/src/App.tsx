@@ -31,32 +31,24 @@ function Router({ queryClient }: { queryClient: QueryClient }) {
         {/* Non-Web3 routes */}
         <Route path={"/"} component={Home} />
         <Route path={"/roadmap"}>
-          {() => (
-            <Suspense fallback={<LoadingFallback />}>
-              <Roadmap />
-            </Suspense>
-          )}
+          <Suspense fallback={<LoadingFallback />}>
+            <Roadmap />
+          </Suspense>
         </Route>
         <Route path={"/faq"}>
-          {() => (
-            <Suspense fallback={<LoadingFallback />}>
-              <FAQ />
-            </Suspense>
-          )}
+          <Suspense fallback={<LoadingFallback />}>
+            <FAQ />
+          </Suspense>
         </Route>
         <Route path={"/whitepaper"}>
-          {() => (
-            <Suspense fallback={<LoadingFallback />}>
-              <Whitepaper />
-            </Suspense>
-          )}
+          <Suspense fallback={<LoadingFallback />}>
+            <Whitepaper />
+          </Suspense>
         </Route>
         <Route path={"/tokenomics"}>
-          {() => (
-            <Suspense fallback={<LoadingFallback />}>
-              <Tokenomics />
-            </Suspense>
-          )}
+          <Suspense fallback={<LoadingFallback />}>
+            <Tokenomics />
+          </Suspense>
         </Route>
         
         {/* Web3 routes - wrapped with Suspense and Web3Wrapper */}
@@ -124,16 +116,14 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <Suspense fallback={<LoadingFallback />}>
-        <ThemeProvider defaultTheme="dark" storageKey="lubdan-theme">
-          <LanguageProvider>
-            <TooltipProvider>
-              <Toaster />
-              <Router queryClient={queryClient} />
-            </TooltipProvider>
-          </LanguageProvider>
-        </ThemeProvider>
-      </Suspense>
+      <ThemeProvider defaultTheme="dark" storageKey="lubdan-theme">
+        <LanguageProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Router queryClient={queryClient} />
+          </TooltipProvider>
+        </LanguageProvider>
+      </ThemeProvider>
     </ErrorBoundary>
   );
 }
