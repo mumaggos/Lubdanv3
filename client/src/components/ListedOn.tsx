@@ -11,27 +11,27 @@ interface ListingItem {
 const listings: ListingItem[] = [
   {
     name: "CoinHunt",
-    logo: "/partners/coinhunt.png",
+    logo: "/partners/coinhunt.avif",
     link: "https://coinhunt.cc/coin/6972848344306e7c4f3f00fc",
   },
   {
     name: "CoinSniper",
-    logo: "/partners/coinsniper.png",
+    logo: "/partners/coinsniper.avif",
     link: "https://coinsniper.net/coin/89369",
   },
   {
     name: "PolygonScan",
-    logo: "/partners/polygonscan.png",
+    logo: "/partners/polygonscan.avif",
     isComingSoon: true,
   },
   {
     name: "CoinMarketCap",
-    logo: "/partners/coinmarketcap.png",
+    logo: "/partners/coinmarketcap.avif",
     isComingSoon: true,
   },
   {
     name: "CoinGecko",
-    logo: "/partners/coingecko.png",
+    logo: "/partners/coingecko.avif",
     isComingSoon: true,
   },
 ];

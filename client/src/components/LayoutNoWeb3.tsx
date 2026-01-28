@@ -156,7 +156,7 @@ export default function LayoutNoWeb3({ children }: { children: React.ReactNode }
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
             <div className="col-span-1 md:col-span-2">
               <div className="flex items-center gap-3 mb-6">
-                <img src="/images/token.png" alt="Lubdan" className="w-8 h-8" />
+                <img src="/images/token.avif" alt="Lubdan" className="w-8 h-8" loading="lazy" />
                 <span className="font-display text-xl font-bold lubdan-title lubdan-shine">LUBDAN</span>
               </div>
               <p className="text-muted-foreground max-w-md mb-6 leading-relaxed">
