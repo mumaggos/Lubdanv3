@@ -4,10 +4,12 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ArrowRight, ShieldCheck, TrendingUp, Coins, Zap } from "lucide-react";
 import { Link } from "wouter";
-
-import Newsletter from "@/components/Newsletter";
-import ListedOn from "@/components/ListedOn";
+import { Suspense, lazy } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+
+// Lazy load heavy components
+const Newsletter = lazy(() => import("@/components/Newsletter"));
+const ListedOn = lazy(() => import("@/components/ListedOn"));
 
 export default function Home() {
   const { t } = useLanguage();
@@ -194,10 +196,14 @@ export default function Home() {
       </section>
 
       {/* Newsletter Section */}
-      <Newsletter />
+      <Suspense fallback={<div className="h-96" />}>
+        <Newsletter />
+      </Suspense>
 
       {/* Listed On Section */}
-      <ListedOn />
+      <Suspense fallback={<div className="h-32" />}>
+        <ListedOn />
+      </Suspense>
 
       {/* Features Section */}
       <section className="py-24 relative">
