@@ -56,15 +56,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="format-detection" content="email=no">
     
-    <!-- Google Analytics -->
-    <!-- Defer non-critical scripts -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=%VITE_ANALYTICS_ID%"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '%VITE_ANALYTICS_ID%');
-    </script>
+    <!-- Google Analytics - Deferred to improve performance -->
     
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -96,14 +88,9 @@
   <body>
     <div id="root"></div>
     <noscript>This site requires JavaScript to be enabled.</noscript>
-    <!-- Transak Widget -->
-    <script async src="https://widget.transak.com/v2/index.js"></script>
+    <!-- Transak Widget - Deferred to improve performance -->
     <script type="module" src="/src/main.tsx" defer></script>
-    <script
-      defer
-      src="%VITE_ANALYTICS_ENDPOINT%/umami"
-      data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"
-      data-auto-track="false"></script>
+    <!-- Umami Analytics - Deferred to improve performance -->
   </body>
 
 </html>
