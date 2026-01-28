@@ -353,6 +353,94 @@ function generateRoadmapPage() {
   );
 }
 
+// Generate Whitepaper Page
+function generateWhitepaperPage() {
+  const content = `
+    <h1>Lubdan Whitepaper</h1>
+    <p>The complete technical and business documentation for the ${tokenInfo.projectName} project.</p>
+    
+    <h2>Overview</h2>
+    <p>${tokenInfo.shortDescription}</p>
+    
+    <h2>Key Features</h2>
+    <ul style="margin-left: 20px;">
+      <li>Real MATIC dividends from casino profits</li>
+      <li>Transparent on-chain operations</li>
+      <li>Sustainable tokenomics</li>
+      <li>Community-driven governance</li>
+    </ul>
+    
+    <h2>Technology Stack</h2>
+    <p>Built on the Polygon blockchain for scalability and low transaction costs.</p>
+    
+    <div class="links">
+      <a href="${tokenInfo.whitepaperUrl}" target="_blank">Download Full Whitepaper (PDF)</a>
+      <a href="/token-info">Token Information</a>
+      <a href="/tokenomics">Tokenomics</a>
+      <a href="/roadmap">Roadmap</a>
+      <a href="${tokenInfo.website}">Back to Website</a>
+    </div>
+  `;
+  
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Lubdan Whitepaper',
+    description: 'Technical and business documentation',
+    url: 'https://www.lubdan.com/whitepaper'
+  };
+  
+  return generateHTML(
+    `${tokenInfo.projectName} Whitepaper`,
+    'Technical and business documentation',
+    content,
+    jsonLd
+  );
+}
+
+// Generate FAQ Page
+function generateFAQPage() {
+  const content = `
+    <h1>Frequently Asked Questions</h1>
+    <p>Common questions about ${tokenInfo.projectName} and how it works.</p>
+    
+    <h2>General Questions</h2>
+    <p><strong>What is Lubdan?</strong></p>
+    <p>${tokenInfo.shortDescription}</p>
+    
+    <p><strong>How do I earn dividends?</strong></p>
+    <p>By holding LBD tokens, you automatically earn real MATIC dividends from casino profits distributed on-chain.</p>
+    
+    <p><strong>What is the token contract address?</strong></p>
+    <p><a href="https://polygonscan.com/token/${tokenInfo.tokenContractAddress}" target="_blank">${tokenInfo.tokenContractAddress}</a></p>
+    
+    <h2>Resources</h2>
+    <div class="links">
+      <a href="${tokenInfo.whitepaperUrl}" target="_blank">Whitepaper</a>
+      <a href="/token-info">Token Information</a>
+      <a href="/tokenomics">Tokenomics</a>
+      <a href="/roadmap">Roadmap</a>
+      <a href="${tokenInfo.telegramUrl}" target="_blank">Telegram Support</a>
+      <a href="${tokenInfo.website}">Back to Website</a>
+    </div>
+  `;
+  
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Lubdan FAQ',
+    description: 'Frequently asked questions',
+    url: 'https://www.lubdan.com/faq'
+  };
+  
+  return generateHTML(
+    `${tokenInfo.projectName} FAQ`,
+    'Frequently asked questions',
+    content,
+    jsonLd
+  );
+}
+
 // Generate all pages
 console.log('🔄 Generating static HTML pages...');
 
@@ -368,6 +456,14 @@ try {
   const roadmapHTML = generateRoadmapPage();
   fs.writeFileSync(path.join(publicPath, 'roadmap.html'), roadmapHTML);
   console.log('✅ Generated: client/public/roadmap.html');
+  
+  const whitepaperHTML = generateWhitepaperPage();
+  fs.writeFileSync(path.join(publicPath, 'whitepaper.html'), whitepaperHTML);
+  console.log('✅ Generated: client/public/whitepaper.html');
+  
+  const faqHTML = generateFAQPage();
+  fs.writeFileSync(path.join(publicPath, 'faq.html'), faqHTML);
+  console.log('✅ Generated: client/public/faq.html');
   
   console.log('✨ All static pages generated successfully!');
 } catch (error) {
