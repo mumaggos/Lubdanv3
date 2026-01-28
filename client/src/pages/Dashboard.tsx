@@ -79,7 +79,10 @@ export default function Dashboard() {
             >
               <div className="flex items-center gap-4 mb-4">
                 <div className="p-3 rounded-xl bg-primary/10">
-                  <img src="/images/token.png" alt="LBD" className="h-8 w-8" />
+                  <picture>
+                    <source srcSet="/images/token.avif" type="image/avif" />
+                    <img src="/images/token.png" alt="LBD" className="h-8 w-8" loading="lazy" />
+                  </picture>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">{t('dashboard.your_holdings')}</p>

@@ -36,7 +36,7 @@ export default function LayoutNoWeb3({ children }: { children: React.ReactNode }
     <div className="min-h-screen flex flex-col relative overflow-hidden">
       {/* Background Elements */}
       <div className="fixed inset-0 z-[-1] pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/background.png')] bg-cover bg-center opacity-20 mix-blend-overlay" />
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/background.avif')] bg-cover bg-center opacity-20 mix-blend-overlay" />
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[100px]" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary/10 rounded-full blur-[100px]" />
       </div>
@@ -52,11 +52,15 @@ export default function LayoutNoWeb3({ children }: { children: React.ReactNode }
          <Link href="/">
             <a className="flex items-center gap-3 group">
               <div className="relative w-10 h-10">
-                <img 
-                  src="/images/token.png" 
-                  alt="Lubdan Logo" 
-                  className="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(212,175,55,0.5)] transition-transform group-hover:scale-110 duration-300 scale-150" 
-                />
+                <picture>
+                  <source srcSet="/images/token.avif" type="image/avif" />
+                  <img 
+                    src="/images/token.png" 
+                    alt="Lubdan Logo" 
+                    className="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(212,175,55,0.5)] transition-transform group-hover:scale-110 duration-300 scale-150" 
+                    loading="eager"
+                  />
+                </picture>
               </div>
               <span className="font-display text-2xl font-bold text-primary tracking-wider group-hover:text-primary/80 transition-colors">
                 LUBDAN

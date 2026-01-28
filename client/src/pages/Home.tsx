@@ -179,11 +179,15 @@ export default function Home() {
               </p>
             </div>
             <div className="relative h-[400px] rounded-2xl overflow-hidden border border-primary/20 shadow-2xl glass-card">
-              <img 
-                src="/images/lubdan-treasure.png" 
-                alt="Lubdan Treasure" 
-                className="w-full h-full object-cover"
-              />
+              <picture>
+                <source srcSet="/images/lubdan-treasure.avif" type="image/avif" />
+                <img 
+                  src="/images/lubdan-treasure.png" 
+                  alt="Lubdan Treasure" 
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </picture>
             </div>
           </div>
         </div>
