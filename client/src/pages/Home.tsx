@@ -5,8 +5,6 @@ import { ArrowRight, Menu, X, ChevronDown } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
-import { safeStorage } from "@/lib/storage";
-import { PRESALE_CONFIG } from "@/lib/contracts";
 
 // Clover icon - matches reference exactly
 function CloverIcon({ className }: { className?: string }) {
@@ -56,25 +54,22 @@ function PolygonIcon({ className }: { className?: string }) {
   );
 }
 
+// Presale data - placeholders until wired to chain
+const PRESALE_DATA = {
+  currentPhase: 1,
+  price: 0.20,
+  totalSold: 1200000,
+  phase1Remaining: 5100000,
+  phase2Remaining: 3150000,
+};
+
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [email, setEmail] = useState("");
-  const [subscribeStatus, setSubscribeStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-
-  // Presale data - will show real data when connected to chain
-  const presaleData = {
-    currentPhase: 1,
-    price: PRESALE_CONFIG.PHASE_1.PRICE,
-    totalSold: 1200000,
-    phase1Remaining: 5100000,
-    phase2Remaining: PRESALE_CONFIG.PHASE_2.ALLOCATION,
-  };
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -87,80 +82,76 @@ export default function Home() {
     { label: "Roadmap", path: "/roadmap" },
   ];
 
-  const handleSubscribe = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email || !email.includes("@")) return;
-
-    setSubscribeStatus("loading");
-    try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify({
-          access_key: import.meta.env.VITE_WEB3FORMS_KEY || "22edb0ef-21a2-4381-a930-0be17f2c6b7a",
-          subject: "New Newsletter Subscriber - Lubdan",
-          from_name: "Lubdan Newsletter",
-          email: email,
-          message: `New subscriber: ${email}`,
-        }),
-      });
-
-      if (response.ok) {
-        setSubscribeStatus("success");
-        setEmail("");
-        const subscribers = JSON.parse(safeStorage.getItem("lubdan_subscribers") || "[]");
-        subscribers.push({ email, subscribedAt: new Date().toISOString() });
-        safeStorage.setItem("lubdan_subscribers", JSON.stringify(subscribers));
-        setTimeout(() => setSubscribeStatus("idle"), 3000);
-      } else {
-        setSubscribeStatus("error");
-        setTimeout(() => setSubscribeStatus("idle"), 3000);
-      }
-    } catch {
-      setSubscribeStatus("error");
-      setTimeout(() => setSubscribeStatus("idle"), 3000);
-    }
-  };
-
-  const formatNumber = (num: number) => {
-    return num.toLocaleString('en-US');
-  };
+  const formatNumber = (num: number) => num.toLocaleString("en-US");
 
   return (
-    <div className="min-h-screen flex flex-col relative overflow-x-hidden">
-      {/* Background Image - Full screen */}
-      <div 
-        className="fixed inset-0 z-0"
-        style={{
-          backgroundImage: `url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_2892-ectwXQjeNCvTClnMtgwdEoLpmfMWbD.png')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }}
-      />
+    <div className="min-h-screen relative overflow-hidden bg-[#050805]">
+      {/* Background Layer */}
+      <div className="fixed inset-0 z-0">
+        {/* Base gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a1a0a] via-[#050805] to-[#080c08]" />
+        
+        {/* Generated cinematic background */}
+        <div 
+          className="absolute inset-0 opacity-80"
+          style={{
+            backgroundImage: "url('/images/hero-bg.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        
+        {/* Dark overlay for text contrast */}
+        <div className="absolute inset-0 bg-black/40" />
+        
+        {/* Green glow top */}
+        <div className="absolute top-0 left-1/4 w-[600px] h-[400px] bg-[#1a5a1a]/20 rounded-full blur-[150px]" />
+        
+        {/* Gold accent glow */}
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[300px] bg-[#d4af37]/10 rounded-full blur-[120px]" />
+        
+        {/* Vignette */}
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%)" }} />
+      </div>
 
-      {/* ========== HEADER - Desktop ========== */}
-      <header
-        className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 hidden lg:block",
-          scrolled ? "pt-2" : "pt-4"
-        )}
-      >
-        <div className="mx-auto max-w-[1200px] px-4">
-          <div className="flex items-center justify-between bg-[rgba(10,20,10,0.85)] border border-[#d4af37]/50 rounded-lg px-6 py-3 backdrop-blur-sm">
+      {/* Leprechaun Character - Desktop only, positioned left */}
+      <div className="hidden lg:block fixed left-0 bottom-0 z-10 pointer-events-none" style={{ width: "45%", maxWidth: "600px" }}>
+        <img 
+          src="/images/leprechaun-lubdan.png" 
+          alt="" 
+          className="w-full h-auto object-contain drop-shadow-2xl"
+          style={{ filter: "drop-shadow(0 0 40px rgba(212,175,55,0.3))" }}
+        />
+      </div>
+
+      {/* ===== HEADER - Desktop ===== */}
+      <header className={cn(
+        "fixed top-0 left-0 right-0 z-50 hidden lg:block transition-all duration-300",
+        scrolled ? "pt-2" : "pt-4"
+      )}>
+        <div className="mx-auto max-w-[1200px] px-6">
+          <div 
+            className="flex items-center justify-between rounded-xl px-6 py-3"
+            style={{ 
+              backgroundColor: "rgba(8,15,8,0.85)", 
+              border: "1px solid rgba(212,175,55,0.4)",
+              backdropFilter: "blur(12px)",
+              boxShadow: "0 4px 30px rgba(0,0,0,0.3), inset 0 1px 0 rgba(212,175,55,0.1)"
+            }}
+          >
             {/* Logo */}
             <Link href="/">
-              <a className="flex items-center gap-2">
-                <CloverIcon className="w-8 h-8 text-[#2d8a2d]" />
-                <span className="text-xl font-bold text-[#d4af37] tracking-wide">LUBDAN</span>
+              <a className="flex items-center gap-3">
+                <CloverIcon className="w-9 h-9 text-[#2d8a2d] drop-shadow-[0_0_8px_rgba(45,138,45,0.5)]" />
+                <span className="text-2xl font-bold tracking-wider text-[#d4af37] drop-shadow-[0_0_10px_rgba(212,175,55,0.3)]">LUBDAN</span>
               </a>
             </Link>
 
-            {/* Nav Items */}
+            {/* Nav */}
             <nav className="flex items-center gap-8">
               {navItems.map((item) => (
                 <Link key={item.path} href={item.path}>
-                  <a className="flex items-center gap-1 text-sm text-white/80 hover:text-[#d4af37] transition-colors">
+                  <a className="flex items-center gap-1 text-sm text-white/80 hover:text-[#d4af37] transition-colors font-medium">
                     {item.label}
                     {item.hasDropdown && <ChevronDown className="w-4 h-4" />}
                   </a>
@@ -170,17 +161,19 @@ export default function Home() {
 
             {/* Social + Connect */}
             <div className="flex items-center gap-5">
-              <a href="https://x.com/ludbanlbd" target="_blank" rel="noopener noreferrer" className="text-[#d4af37] hover:text-[#d4af37]/70 transition-colors">
+              <a href="https://x.com/ludbanlbd" target="_blank" rel="noopener noreferrer" className="text-[#d4af37] hover:text-[#f5d76e] transition-colors">
                 <XIcon className="w-5 h-5" />
               </a>
-              <a href="https://t.me/LubdanOfficial" target="_blank" rel="noopener noreferrer" className="text-[#d4af37] hover:text-[#d4af37]/70 transition-colors">
+              <a href="https://t.me/LubdanOfficial" target="_blank" rel="noopener noreferrer" className="text-[#d4af37] hover:text-[#f5d76e] transition-colors">
                 <TelegramIcon className="w-5 h-5" />
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-[#d4af37] hover:text-[#d4af37]/70 transition-colors">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-[#d4af37] hover:text-[#f5d76e] transition-colors">
                 <InstagramIcon className="w-5 h-5" />
               </a>
               <Link href="/presale">
-                <Button className="bg-[#2d8a2d] hover:bg-[#2d8a2d]/90 text-white font-medium px-5 py-2 h-auto rounded-md text-sm">
+                <Button 
+                  className="text-white font-semibold px-5 py-2.5 h-auto rounded-lg text-sm bg-[#2d8a2d] hover:bg-[#3a9a3a] shadow-[0_0_20px_rgba(45,138,45,0.3)]"
+                >
                   Connect Wallet
                 </Button>
               </Link>
@@ -189,41 +182,53 @@ export default function Home() {
         </div>
       </header>
 
-      {/* ========== HEADER - Mobile ========== */}
+      {/* ===== HEADER - Mobile ===== */}
       <header className={cn(
         "fixed top-0 left-0 right-0 z-50 lg:hidden transition-all duration-300",
         scrolled ? "pt-2" : "pt-3"
       )}>
         <div className="mx-4">
-          <div className="flex items-center justify-between bg-[rgba(10,20,10,0.9)] border border-[#d4af37]/50 rounded-lg px-4 py-3 backdrop-blur-sm">
+          <div 
+            className="flex items-center justify-between rounded-xl px-4 py-3"
+            style={{ 
+              backgroundColor: "rgba(8,15,8,0.9)", 
+              border: "1px solid rgba(212,175,55,0.4)",
+              backdropFilter: "blur(12px)"
+            }}
+          >
             <Link href="/">
               <a className="flex items-center gap-2">
-                <CloverIcon className="w-7 h-7 text-[#2d8a2d]" />
-                <span className="text-lg font-bold text-[#d4af37] tracking-wide">LUBDAN</span>
+                <CloverIcon className="w-8 h-8 text-[#2d8a2d]" />
+                <span className="text-xl font-bold tracking-wider text-[#d4af37]">LUBDAN</span>
               </a>
             </Link>
-            <button 
-              className="text-[#d4af37] p-1"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-[#d4af37] p-1">
+              {isMenuOpen ? <X size={26} /> : <Menu size={26} />}
             </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile Nav Overlay */}
+      {/* Mobile Menu Dropdown */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="fixed inset-x-4 top-[72px] z-40 lg:hidden"
+            transition={{ duration: 0.2 }}
+            className="fixed inset-x-4 top-[76px] z-40 lg:hidden"
           >
-            <div className="bg-[rgba(10,20,10,0.95)] border border-[#d4af37]/50 rounded-lg p-4 backdrop-blur-sm">
-              {/* Top bar with icons */}
-              <div className="flex items-center justify-center gap-4 pb-4 border-b border-[#d4af37]/30">
+            <div 
+              className="rounded-xl p-4"
+              style={{ 
+                backgroundColor: "rgba(8,15,8,0.95)", 
+                border: "1px solid rgba(212,175,55,0.4)",
+                backdropFilter: "blur(12px)"
+              }}
+            >
+              {/* Social row - matches mobile reference */}
+              <div className="flex items-center justify-center gap-4 pb-4 mb-4 border-b border-[#d4af37]/30">
                 <CloverIcon className="w-6 h-6 text-[#2d8a2d]" />
                 <a href="https://x.com/ludbanlbd" target="_blank" rel="noopener noreferrer" className="text-[#d4af37]">
                   <XIcon className="w-5 h-5" />
@@ -235,67 +240,94 @@ export default function Home() {
                   <InstagramIcon className="w-5 h-5" />
                 </a>
                 <Link href="/presale">
-                  <Button size="sm" className="bg-[#2d8a2d] text-white text-xs px-3 h-8 rounded">
+                  <Button size="sm" className="text-white text-xs px-4 h-8 rounded-lg bg-[#2d8a2d] hover:bg-[#3a9a3a]">
                     Connect
                   </Button>
                 </Link>
               </div>
-              {/* Nav links */}
-              <div className="pt-4 flex flex-col gap-3">
+              {/* Nav items */}
+              <nav className="flex flex-col gap-1">
                 {navItems.map((item) => (
                   <Link key={item.path} href={item.path}>
                     <a 
-                      className="text-base text-white/90 hover:text-[#d4af37] py-2"
+                      className="text-base text-white/90 hover:text-[#d4af37] py-3 px-2 rounded-lg hover:bg-white/5 transition-colors" 
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.label}
                     </a>
                   </Link>
                 ))}
-              </div>
+              </nav>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* ========== MAIN CONTENT ========== */}
-      <main className="flex-grow relative z-10 pt-24 lg:pt-28 px-4">
+      {/* ===== MAIN CONTENT ===== */}
+      <main className="relative z-20 pt-24 lg:pt-32 px-4 lg:px-6">
         <div className="max-w-[1200px] mx-auto">
           
-          {/* ===== HERO SECTION ===== */}
-          <section className="min-h-[50vh] lg:min-h-[55vh] flex items-center">
-            <div className="w-full lg:w-1/2 lg:ml-auto text-center lg:text-left">
+          {/* Hero Section - Text on right side (desktop) */}
+          <section className="min-h-[45vh] lg:min-h-[50vh] flex items-center">
+            <div className="w-full lg:w-1/2 lg:ml-auto text-center lg:text-left lg:pr-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.6 }}
               >
-                {/* Title - Serif italic gold */}
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-[56px] leading-tight mb-4">
-                  <span className="text-[#d4af37]" style={{ fontFamily: "'Playfair Display', serif", fontStyle: 'italic' }}>
-                    Where Strategy Meets Luck
-                  </span>
+                {/* Main Title - Serif italic gold, exact match */}
+                <h1 
+                  className="text-[32px] sm:text-[40px] lg:text-[48px] xl:text-[56px] leading-[1.15] mb-5"
+                  style={{ 
+                    fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif", 
+                    fontStyle: "italic", 
+                    color: "#d4af37",
+                    textShadow: "0 2px 20px rgba(212,175,55,0.3)"
+                  }}
+                >
+                  Where Strategy Meets Luck
                 </h1>
                 
                 {/* Subtitle */}
-                <p className="text-base sm:text-lg lg:text-xl text-white/80 mb-8 max-w-md mx-auto lg:mx-0">
+                <p className="text-[16px] sm:text-[18px] lg:text-[20px] text-white/75 mb-8 max-w-[480px] mx-auto lg:mx-0 leading-relaxed">
                   A long-term Polygon project with real MATIC dividends.
                 </p>
 
                 {/* CTA Buttons - 3 in a row on desktop, stacked on mobile */}
                 <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
                   <Link href="/presale">
-                    <button className="w-full sm:w-auto px-6 py-3 bg-[rgba(15,25,15,0.8)] border border-[#d4af37]/60 rounded-lg text-white font-medium hover:bg-[rgba(25,40,25,0.9)] transition-colors flex items-center justify-center gap-2">
+                    <button 
+                      className="w-full sm:w-auto px-6 py-3.5 rounded-lg text-white font-medium flex items-center justify-center gap-2 transition-all hover:bg-[#1a2a1a]/90"
+                      style={{ 
+                        backgroundColor: "rgba(15,25,15,0.75)", 
+                        border: "1px solid rgba(212,175,55,0.5)",
+                        boxShadow: "0 2px 15px rgba(0,0,0,0.2)"
+                      }}
+                    >
                       Join Presale <ArrowRight className="w-4 h-4" />
                     </button>
                   </Link>
                   <a href="https://global.transak.com/" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
-                    <button className="w-full px-6 py-3 bg-[rgba(15,25,15,0.8)] border border-[#d4af37]/60 rounded-lg text-white font-medium hover:bg-[rgba(25,40,25,0.9)] transition-colors flex items-center justify-center gap-2">
+                    <button 
+                      className="w-full px-6 py-3.5 rounded-lg text-white font-medium flex items-center justify-center gap-2 transition-all hover:bg-[#1a2a1a]/90"
+                      style={{ 
+                        backgroundColor: "rgba(15,25,15,0.75)", 
+                        border: "1px solid rgba(212,175,55,0.5)",
+                        boxShadow: "0 2px 15px rgba(0,0,0,0.2)"
+                      }}
+                    >
                       Buy with Card <ArrowRight className="w-4 h-4" />
                     </button>
                   </a>
                   <Link href="/whitepaper">
-                    <button className="w-full sm:w-auto px-6 py-3 bg-[rgba(15,25,15,0.8)] border border-[#d4af37]/60 rounded-lg text-white font-medium hover:bg-[rgba(25,40,25,0.9)] transition-colors flex items-center justify-center gap-2">
+                    <button 
+                      className="w-full sm:w-auto px-6 py-3.5 rounded-lg text-white font-medium flex items-center justify-center gap-2 transition-all hover:bg-[#1a2a1a]/90"
+                      style={{ 
+                        backgroundColor: "rgba(15,25,15,0.75)", 
+                        border: "1px solid rgba(212,175,55,0.5)",
+                        boxShadow: "0 2px 15px rgba(0,0,0,0.2)"
+                      }}
+                    >
                       Read Whitepaper <ArrowRight className="w-4 h-4" />
                     </button>
                   </Link>
@@ -304,19 +336,24 @@ export default function Home() {
             </div>
           </section>
 
-          {/* ===== STATS CARDS ===== */}
+          {/* Stats Cards - 4 columns on desktop, stacked on mobile */}
           <section className="py-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* Current Phase */}
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="bg-[rgba(15,25,15,0.85)] border border-[#d4af37]/50 rounded-lg p-5"
+                className="rounded-xl p-5"
+                style={{ 
+                  backgroundColor: "rgba(12,22,12,0.8)", 
+                  border: "1px solid rgba(212,175,55,0.45)",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.25)"
+                }}
               >
-                <p className="text-sm text-white/60 mb-1">Current Phase:</p>
-                <p className="text-xl font-display font-semibold text-white">
-                  Phase {presaleData.currentPhase} - <span className="text-[#d4af37]">${presaleData.price.toFixed(2)}</span>
+                <p className="text-sm text-white/55 mb-2">Current Phase:</p>
+                <p className="text-[22px] font-semibold text-white">
+                  Phase {PRESALE_DATA.currentPhase} - <span className="text-[#d4af37]">${PRESALE_DATA.price.toFixed(2)}</span>
                 </p>
               </motion.div>
 
@@ -325,12 +362,17 @@ export default function Home() {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15 }}
-                className="bg-[rgba(15,25,15,0.85)] border border-[#d4af37]/50 rounded-lg p-5"
+                className="rounded-xl p-5"
+                style={{ 
+                  backgroundColor: "rgba(12,22,12,0.8)", 
+                  border: "1px solid rgba(212,175,55,0.45)",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.25)"
+                }}
               >
-                <p className="text-sm text-white/60 mb-1">LBD Sold:</p>
-                <p className="text-xl font-display font-semibold">
-                  <span className="text-[#d4af37]">{formatNumber(presaleData.totalSold)}</span>
-                  <span className="text-white/70 text-base ml-1">LBD</span>
+                <p className="text-sm text-white/55 mb-2">LBD Sold:</p>
+                <p className="text-[22px] font-semibold">
+                  <span className="text-[#d4af37]">{formatNumber(PRESALE_DATA.totalSold)}</span>
+                  <span className="text-white/60 text-base ml-2">LBD</span>
                 </p>
               </motion.div>
 
@@ -339,12 +381,17 @@ export default function Home() {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="bg-[rgba(15,25,15,0.85)] border border-[#d4af37]/50 rounded-lg p-5"
+                className="rounded-xl p-5"
+                style={{ 
+                  backgroundColor: "rgba(12,22,12,0.8)", 
+                  border: "1px solid rgba(212,175,55,0.45)",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.25)"
+                }}
               >
-                <p className="text-sm text-white/60 mb-1">Phase 1 Remaining:</p>
-                <p className="text-xl font-display font-semibold">
-                  <span className="text-[#d4af37]">{formatNumber(presaleData.phase1Remaining)}</span>
-                  <span className="text-white/70 text-base ml-1">LBD</span>
+                <p className="text-sm text-white/55 mb-2">Phase 1 Remaining:</p>
+                <p className="text-[22px] font-semibold">
+                  <span className="text-[#d4af37]">{formatNumber(PRESALE_DATA.phase1Remaining)}</span>
+                  <span className="text-white/60 text-base ml-2">LBD</span>
                 </p>
               </motion.div>
 
@@ -353,34 +400,45 @@ export default function Home() {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.25 }}
-                className="bg-[rgba(15,25,15,0.85)] border border-[#d4af37]/50 rounded-lg p-5"
+                className="rounded-xl p-5"
+                style={{ 
+                  backgroundColor: "rgba(12,22,12,0.8)", 
+                  border: "1px solid rgba(212,175,55,0.45)",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.25)"
+                }}
               >
-                <p className="text-sm text-white/60 mb-1">Phase 2 Remaining:</p>
-                <p className="text-xl font-display font-semibold">
-                  <span className="text-[#d4af37]">{formatNumber(presaleData.phase2Remaining)}</span>
-                  <span className="text-white/70 text-base ml-1">LBD</span>
+                <p className="text-sm text-white/55 mb-2">Phase 2 Remaining:</p>
+                <p className="text-[22px] font-semibold">
+                  <span className="text-[#d4af37]">{formatNumber(PRESALE_DATA.phase2Remaining)}</span>
+                  <span className="text-white/60 text-base ml-2">LBD</span>
                 </p>
               </motion.div>
             </div>
           </section>
 
-          {/* ===== BOTTOM SECTION - Dividends + Subscribe ===== */}
-          <section className="py-6 grid grid-cols-1 lg:grid-cols-2 gap-3">
+          {/* Bottom Section - Dividends + Subscribe side by side */}
+          <section className="py-6 grid grid-cols-1 lg:grid-cols-2 gap-4">
             {/* Earn MATIC Dividends */}
             <motion.div
               initial={{ opacity: 0, x: -15 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
-              className="bg-[rgba(15,25,15,0.85)] border border-[#d4af37]/50 rounded-lg p-5 flex items-center gap-5"
+              className="rounded-xl p-5 flex items-center gap-5"
+              style={{ 
+                backgroundColor: "rgba(12,22,12,0.8)", 
+                border: "1px solid rgba(212,175,55,0.45)",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.25)"
+              }}
             >
-              <div className="w-14 h-14 rounded-lg bg-[#8247e5]/20 flex items-center justify-center flex-shrink-0">
-                <PolygonIcon className="w-9 h-9 text-[#8247e5]" />
+              <div 
+                className="w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0"
+                style={{ backgroundColor: "rgba(130,71,229,0.15)" }}
+              >
+                <PolygonIcon className="w-10 h-10 text-[#8247e5]" />
               </div>
               <div>
-                <h3 className="text-lg font-display font-semibold text-white mb-1">
-                  Earn MATIC Dividends
-                </h3>
-                <div className="flex items-center gap-2 text-white/60 text-sm">
+                <h3 className="text-[18px] font-semibold text-white mb-1">Earn MATIC Dividends</h3>
+                <div className="flex items-center gap-2 text-white/50 text-sm">
                   <PolygonIcon className="w-4 h-4" />
                   <span>Polygon</span>
                 </div>
@@ -392,42 +450,42 @@ export default function Home() {
               initial={{ opacity: 0, x: 15 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.35 }}
-              className="bg-[rgba(15,25,15,0.85)] border border-[#d4af37]/50 rounded-lg p-5"
+              className="rounded-xl p-5"
+              style={{ 
+                backgroundColor: "rgba(12,22,12,0.8)", 
+                border: "1px solid rgba(212,175,55,0.45)",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.25)"
+              }}
             >
-              <h3 className="text-lg font-display font-semibold text-white mb-3">
-                Subscribe for Updates
-              </h3>
-              <form onSubmit={handleSubscribe} className="flex gap-2">
+              <h3 className="text-[18px] font-semibold text-white mb-4">Subscribe for Updates</h3>
+              <form className="flex gap-3" onSubmit={(e) => e.preventDefault()}>
                 <Input
                   type="email"
                   placeholder="Enter your email..."
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  disabled={subscribeStatus === "loading"}
-                  className="flex-1 bg-[rgba(10,15,10,0.6)] border-[#d4af37]/30 text-white placeholder:text-white/40 h-10"
+                  className="flex-1 h-11 text-white placeholder:text-white/35 bg-[#0a150a]/60 border-[#d4af37]/25 focus:border-[#d4af37]/50 rounded-lg"
                 />
                 <Button 
-                  type="submit"
-                  disabled={subscribeStatus === "loading" || subscribeStatus === "success"}
-                  className="bg-[#2d8a2d] hover:bg-[#2d8a2d]/90 text-white font-medium px-5 h-10 rounded-md text-sm"
+                  type="submit" 
+                  className="text-white font-semibold px-5 h-11 rounded-lg text-sm bg-[#2d8a2d] hover:bg-[#3a9a3a] shadow-[0_0_15px_rgba(45,138,45,0.25)]"
                 >
-                  {subscribeStatus === "loading" ? "..." : subscribeStatus === "success" ? "Done!" : "Subscribe"}
-                  {subscribeStatus === "idle" && <ArrowRight className="ml-1 w-4 h-4" />}
+                  Subscribe <ArrowRight className="ml-1 w-4 h-4" />
                 </Button>
               </form>
             </motion.div>
           </section>
 
-          {/* ===== FOOTER ===== */}
-          <footer className="py-6 text-center border-t border-[#d4af37]/20 mt-4">
-            <p className="text-white/60 text-sm">
+          {/* Footer */}
+          <footer className="py-8 text-center border-t border-[#d4af37]/20 mt-4">
+            <p className="text-white/50 text-sm">
               Support: <a href="mailto:lubdan.info@gmail.com" className="text-[#d4af37] hover:underline">lubdan.info@gmail.com</a>
             </p>
           </footer>
         </div>
       </main>
 
-      {/* ===== FLOATING TELEGRAM BUTTON ===== */}
+      {/* Floating Telegram Button - Blue gradient, matches reference */}
       <motion.a
         href="https://t.me/LubdanOfficial"
         target="_blank"
@@ -435,10 +493,15 @@ export default function Home() {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.8 }}
-        whileHover={{ scale: 1.05 }}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-[#3ab4f2] to-[#0088cc] shadow-lg shadow-blue-500/30 flex items-center justify-center"
+        whileHover={{ scale: 1.08 }}
+        whileTap={{ scale: 0.95 }}
+        className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full flex items-center justify-center shadow-xl"
+        style={{ 
+          background: "linear-gradient(135deg, #3ab4f2 0%, #0088cc 100%)", 
+          boxShadow: "0 6px 25px rgba(0,136,204,0.45)" 
+        }}
       >
-        <TelegramIcon className="w-7 h-7 text-white" />
+        <TelegramIcon className="w-8 h-8 text-white" />
       </motion.a>
     </div>
   );
