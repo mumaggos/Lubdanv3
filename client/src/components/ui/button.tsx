@@ -9,16 +9,16 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-gradient-to-r from-primary to-primary/90 text-primary-foreground hover:from-primary/95 hover:to-primary/85 shadow-[0_0_20px_rgba(245,195,106,0.3)] hover:shadow-[0_0_30px_rgba(245,195,106,0.5)] font-semibold",
+        default: "bg-gradient-to-r from-primary to-primary/90 text-primary-foreground hover:from-primary/95 hover:to-primary/85 shadow-[0_0_20px_rgba(45,138,45,0.3)] hover:shadow-[0_0_30px_rgba(45,138,45,0.5)] font-semibold",
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
-          "border border-primary/50 bg-transparent hover:bg-primary/10 text-primary hover:border-primary font-semibold transition-all duration-300",
+          "border border-secondary/50 bg-transparent hover:bg-secondary/10 text-secondary hover:border-secondary font-semibold transition-all duration-300",
         secondary:
-          "bg-gradient-to-r from-secondary to-secondary/80 text-secondary-foreground hover:from-secondary/95 hover:to-secondary/75 shadow-[0_0_15px_rgba(139,92,246,0.3)] font-semibold",
+          "bg-gradient-to-r from-secondary to-secondary/80 text-secondary-foreground hover:from-secondary/95 hover:to-secondary/75 shadow-[0_0_15px_rgba(212,175,55,0.3)] font-semibold",
         ghost:
           "hover:bg-accent dark:hover:bg-accent/50",
-        link: "text-primary underline-offset-4 hover:underline",
+        link: "text-secondary underline-offset-4 hover:underline",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

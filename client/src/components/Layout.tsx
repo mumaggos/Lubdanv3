@@ -53,16 +53,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen flex flex-col relative overflow-hidden">
       {/* Background Elements */}
       <div className="fixed inset-0 z-[-1] pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/background.avif')] bg-cover bg-center opacity-20 mix-blend-overlay" />
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[100px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary/10 rounded-full blur-[100px]" />
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/background.avif')] bg-cover bg-center opacity-30 mix-blend-overlay" />
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/15 rounded-full blur-[100px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary/15 rounded-full blur-[100px]" />
       </div>
 
       {/* Header */}
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent",
-          scrolled ? "bg-background/80 backdrop-blur-md border-border/30 py-3" : "bg-transparent py-5"
+          scrolled ? "bg-background/80 backdrop-blur-md border-secondary/30 py-3" : "bg-transparent py-5"
         )}
       >
         <div className="mx-auto max-w-6xl w-full flex items-center justify-between px-4">
@@ -74,12 +74,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   <img 
                     src="/images/token.png" 
                     alt="Lubdan Logo" 
-                    className="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(212,175,55,0.5)] transition-transform group-hover:scale-110 duration-300 scale-150" 
+                    className="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(45,138,45,0.5)] transition-transform group-hover:scale-110 duration-300 scale-150" 
                     loading="eager"
                   />
                 </picture>
               </div>
-              <span className="font-display text-2xl font-bold text-primary tracking-wider group-hover:text-primary/80 transition-colors">
+              <span className="font-display text-2xl font-bold text-secondary tracking-wider group-hover:text-secondary/80 transition-colors">
                 LUBDAN
               </span>
             </a>

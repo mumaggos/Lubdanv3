@@ -50,82 +50,82 @@
 }
 
 :root {
-  /* Cosmic Purple + Luxury Gold Theme */
-  --background: #1B1026;
+  /* Dark Fantasy Green + Gold Theme - LUBDAN */
+  --background: #0a0e0a;
   --foreground: #F5F5F5;
   
-  --card: #2E1C4D;
+  --card: rgba(15, 25, 15, 0.85);
   --card-foreground: #F5F5F5;
   
-  --popover: #24143A;
+  --popover: #0d1a0d;
   --popover-foreground: #F5F5F5;
   
-  --primary: #F5C36A;
-  --primary-foreground: #1B1026;
+  --primary: #2d8a2d;
+  --primary-foreground: #FFFFFF;
   
-  --secondary: #8B5CF6;
-  --secondary-foreground: #F5F5F5;
+  --secondary: #d4af37;
+  --secondary-foreground: #0a0e0a;
   
-  --muted: #2E1C4D;
-  --muted-foreground: #A8A8A8;
+  --muted: #1a2a1a;
+  --muted-foreground: #a8b5a8;
   
-  --accent: #EC4899;
+  --accent: #8b5a2b;
   --accent-foreground: #F5F5F5;
   
   --destructive: #FF6B6B;
   --destructive-foreground: #FFFFFF;
   
-  --border: #E6B85C;
-  --input: #24143A;
-  --ring: #F5C36A;
+  --border: #d4af37;
+  --input: #0d1a0d;
+  --ring: #2d8a2d;
   
   --radius: 0.5rem;
   
-  --chart-1: #F5C36A;
-  --chart-2: #8B5CF6;
-  --chart-3: #EC4899;
-  --chart-4: #F59E0B;
-  --chart-5: #24143A;
+  --chart-1: #2d8a2d;
+  --chart-2: #d4af37;
+  --chart-3: #8b5a2b;
+  --chart-4: #4a7c4a;
+  --chart-5: #1a2a1a;
   
-  --sidebar: #0B0A10;
+  --sidebar: #050805;
   --sidebar-foreground: #F5F5F5;
-  --sidebar-primary: #F5C36A;
-  --sidebar-primary-foreground: #1B1026;
-  --sidebar-accent: #2E1C4D;
+  --sidebar-primary: #2d8a2d;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #1a2a1a;
   --sidebar-accent-foreground: #F5F5F5;
-  --sidebar-border: #E6B85C;
-  --sidebar-ring: #F5C36A;
+  --sidebar-border: #d4af37;
+  --sidebar-ring: #2d8a2d;
 }
 
 .dark {
-  /* Cosmic Purple + Luxury Gold Theme */
-  --background: #1B1026;
+  /* Dark Fantasy Green + Gold Theme - LUBDAN */
+  --background: #0a0e0a;
   --foreground: #F5F5F5;
-  --card: #2E1C4D;
+  --card: rgba(15, 25, 15, 0.85);
   --card-foreground: #F5F5F5;
-  --popover: #24143A;
+  --popover: #0d1a0d;
   --popover-foreground: #F5F5F5;
-  --primary: #F5C36A;
-  --primary-foreground: #1B1026;
-  --secondary: #8B5CF6;
-  --secondary-foreground: #F5F5F5;
-  --muted: #2E1C4D;
-  --muted-foreground: #A8A8A8;
-  --accent: #EC4899;
+  --primary: #2d8a2d;
+  --primary-foreground: #FFFFFF;
+  --secondary: #d4af37;
+  --secondary-foreground: #0a0e0a;
+  --muted: #1a2a1a;
+  --muted-foreground: #a8b5a8;
+  --accent: #8b5a2b;
   --accent-foreground: #F5F5F5;
   --destructive: #FF6B6B;
   --destructive-foreground: #FFFFFF;
-  --border: #E6B85C;
-  --input: #24143A;
-  --ring: #F5C36A;
-  --sidebar: #0B0A10;
+  --border: #d4af37;
+  --input: #0d1a0d;
+  --ring: #2d8a2d;
+  --sidebar: #050805;
   --sidebar-foreground: #F5F5F5;
-  --sidebar-primary: #F5C36A;
-  --sidebar-primary-foreground: #1B1026;
-  --sidebar-accent: #2E1C4D;
+  --sidebar-primary: #2d8a2d;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #1a2a1a;
   --sidebar-accent-foreground: #F5F5F5;
-  --sidebar-border: #E6B85C;
-  --sidebar-ring: #F5C36A;
+  --sidebar-border: #d4af37;
+  --sidebar-ring: #2d8a2d;
 }
 
 @layer base {
@@ -135,9 +135,9 @@
   body {
     @apply bg-background text-foreground font-body antialiased;
     background-image: 
-      radial-gradient(circle at 50% 0%, oklch(0.7 0.2 140 / 0.15), transparent 50%),
-      radial-gradient(circle at 0% 50%, oklch(0.85 0.15 85 / 0.1), transparent 40%),
-      radial-gradient(circle at 100% 50%, oklch(0.85 0.15 85 / 0.1), transparent 40%);
+      radial-gradient(circle at 50% 0%, oklch(0.4 0.15 145 / 0.2), transparent 50%),
+      radial-gradient(circle at 0% 50%, oklch(0.5 0.1 85 / 0.15), transparent 40%),
+      radial-gradient(circle at 100% 50%, oklch(0.5 0.1 85 / 0.15), transparent 40%);
     background-attachment: fixed;
     background-size: 100% 100%;
   }
@@ -149,7 +149,7 @@
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-display tracking-wide text-foreground;
-    text-shadow: 0 0 20px rgba(245, 195, 106, 0.1);
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
   }
   p, span, a {
     @apply text-foreground/90;
@@ -224,31 +224,50 @@
     }
   }
   
-  /* Purple Glow Text Effect */
+  /* Green Glow Text Effect */
   .text-neon {
-    text-shadow: 0 0 10px rgba(139, 92, 246, 0.5), 0 0 20px rgba(139, 92, 246, 0.3);
+    text-shadow: 0 0 10px rgba(45, 138, 45, 0.5), 0 0 20px rgba(45, 138, 45, 0.3);
   }
   
   /* Gold Text Effect */
   .text-gold-glow {
-    text-shadow: 0 0 10px rgba(245, 195, 106, 0.5), 0 0 20px rgba(245, 195, 106, 0.3);
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5), 0 0 20px rgba(212, 175, 55, 0.3);
   }
   
   .text-glow {
-    text-shadow: 0 0 20px rgba(245, 195, 106, 0.5);
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
   }
   
   .neon-border {
-    box-shadow: 0 0 15px rgba(245, 195, 106, 0.2), inset 0 0 20px rgba(245, 195, 106, 0.1);
-    border: 1px solid rgba(245, 195, 106, 0.3);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2), inset 0 0 20px rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.3);
   }
   
   .gold-text {
-    background: linear-gradient(to right, #E6B85C, #FFD77A, #F5C36A, #FFD77A, #E6B85C);
+    background: linear-gradient(to right, #d4af37, #f5d76e, #d4af37, #f5d76e, #d4af37);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    text-shadow: 0 0 10px rgba(245, 195, 106, 0.3);
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+  }
+  
+  /* Glass panel with gold border */
+  .glass-gold {
+    background: rgba(15, 25, 15, 0.7);
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.1), inset 0 0 30px rgba(0, 0, 0, 0.3);
+  }
+  @media (min-width: 1024px) {
+    .glass-gold {
+      backdrop-filter: blur(10px);
+    }
+  }
+  
+  /* Stats card style */
+  .stats-card {
+    background: linear-gradient(135deg, rgba(15, 25, 15, 0.9), rgba(20, 35, 20, 0.8));
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(212, 175, 55, 0.1);
   }
 }
 
@@ -301,13 +320,13 @@
 
 /* Lubdan Title Styling */
 .lubdan-title {
-  background: linear-gradient(135deg, #F5C36A 0%, #FFD77A 25%, #F5C36A 50%, #FFD77A 75%, #F5C36A 100%);
+  background: linear-gradient(135deg, #d4af37 0%, #f5d76e 25%, #d4af37 50%, #f5d76e 75%, #d4af37 100%);
   background-size: 300% 300%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: gradient-shift 4s ease infinite;
-  filter: drop-shadow(0 0 20px rgba(245, 195, 106, 0.5)) drop-shadow(0 0 10px rgba(230, 184, 92, 0.4));
+  filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.5)) drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
   letter-spacing: 0.2em;
   font-weight: 900;
   text-transform: uppercase;
