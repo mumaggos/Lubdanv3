@@ -35,6 +35,9 @@ export default defineConfig({
           if (id.includes('node_modules/viem')) return 'wagmi';
           if (id.includes('node_modules/@radix-ui')) return 'ui';
           if (id.includes('node_modules/framer-motion')) return 'framer';
+          if (id.includes('node_modules/html2pdf')) return 'pdf';
+          if (id.includes('node_modules/html2canvas')) return 'canvas';
+          if (id.includes('node_modules/recharts')) return 'charts';
         },
       },
     },

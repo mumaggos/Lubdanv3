@@ -11,10 +11,6 @@ import { Suspense, lazy, useMemo } from "react";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Web3Wrapper } from "./components/Web3Wrapper";
 import Home from "./pages/Home";
-import Roadmap from "./pages/Roadmap";
-import FAQ from "./pages/FAQ";
-import Whitepaper from "./pages/Whitepaper";
-import Tokenomics from "./pages/Tokenomics";
 
 // Lazy load pages that require Web3
 const Presale = lazy(() => import("./pages/Presale"));
@@ -22,16 +18,46 @@ const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Dividends = lazy(() => import("./pages/Dividends"));
 const Admin = lazy(() => import("./pages/Admin"));
 
+// Lazy load heavy pages with charts and large libraries
+const Tokenomics = lazy(() => import("./pages/Tokenomics"));
+const Roadmap = lazy(() => import("./pages/Roadmap"));
+const FAQ = lazy(() => import("./pages/FAQ"));
+const Whitepaper = lazy(() => import("./pages/Whitepaper"));
+
 function Router({ queryClient }: { queryClient: QueryClient }) {
   return (
     <>
       <Switch>
         {/* Non-Web3 routes */}
         <Route path={"/"} component={Home} />
-        <Route path={"/roadmap"} component={Roadmap} />
-        <Route path={"/faq"} component={FAQ} />
-        <Route path={"/whitepaper"} component={Whitepaper} />
-        <Route path={"/tokenomics"} component={Tokenomics} />
+        <Route path={"/roadmap"}>
+          {() => (
+            <Suspense fallback={<LoadingFallback />}>
+              <Roadmap />
+            </Suspense>
+          )}
+        </Route>
+        <Route path={"/faq"}>
+          {() => (
+            <Suspense fallback={<LoadingFallback />}>
+              <FAQ />
+            </Suspense>
+          )}
+        </Route>
+        <Route path={"/whitepaper"}>
+          {() => (
+            <Suspense fallback={<LoadingFallback />}>
+              <Whitepaper />
+            </Suspense>
+          )}
+        </Route>
+        <Route path={"/tokenomics"}>
+          {() => (
+            <Suspense fallback={<LoadingFallback />}>
+              <Tokenomics />
+            </Suspense>
+          )}
+        </Route>
         
         {/* Web3 routes - wrapped with Suspense and Web3Wrapper */}
         <Route path={"/presale"}>
