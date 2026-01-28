@@ -30,14 +30,36 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: (id) => {
-          if (id.includes('node_modules/react')) return 'vendor';
+          // Core React
+          if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) return 'react';
+          if (id.includes('node_modules/scheduler')) return 'react';
+          
+          // Router
+          if (id.includes('node_modules/wouter')) return 'router';
+          
+          // Web3 (lazy loaded)
           if (id.includes('node_modules/wagmi')) return 'wagmi';
           if (id.includes('node_modules/viem')) return 'wagmi';
+          if (id.includes('node_modules/@wagmi')) return 'wagmi';
+          
+          // UI Components
           if (id.includes('node_modules/@radix-ui')) return 'ui';
+          if (id.includes('node_modules/lucide-react')) return 'icons';
+          
+          // Animations (lazy loaded)
           if (id.includes('node_modules/framer-motion')) return 'framer';
+          
+          // PDF (lazy loaded)
           if (id.includes('node_modules/html2pdf')) return 'pdf';
           if (id.includes('node_modules/html2canvas')) return 'canvas';
+          if (id.includes('node_modules/jspdf')) return 'pdf';
+          
+          // Charts (lazy loaded)
           if (id.includes('node_modules/recharts')) return 'charts';
+          if (id.includes('node_modules/d3-')) return 'charts';
+          
+          // Other vendor code
+          if (id.includes('node_modules/')) return 'vendor';
         },
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name.split('.');
