@@ -45,7 +45,7 @@ export default function LayoutNoWeb3({ children }: { children: React.ReactNode }
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent",
-          scrolled ? "bg-background/80 backdrop-blur-md border-border/30 py-3" : "bg-transparent py-5"
+          scrolled ? "bg-background/95 lg:backdrop-blur-md border-border/30 py-3" : "bg-transparent py-5"
         )}
       >
         <div className="mx-auto max-w-6xl w-full flex items-center justify-between px-4">
