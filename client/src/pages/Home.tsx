@@ -1,19 +1,14 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowRight, Menu, X, Send, Mail, ChevronDown } from "lucide-react";
-import { useState, useEffect, Suspense, lazy } from "react";
+import { ArrowRight, Menu, X, ChevronDown } from "lucide-react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
-import { useLanguage } from "@/contexts/LanguageContext";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { safeStorage } from "@/lib/storage";
 import { PRESALE_CONFIG } from "@/lib/contracts";
 
-// Lazy load Newsletter for email subscription
-const Newsletter = lazy(() => import("@/components/Newsletter"));
-
-// Clover icon component
+// Clover icon - matches reference exactly
 function CloverIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 100 100" className={className} fill="currentColor">
@@ -23,7 +18,7 @@ function CloverIcon({ className }: { className?: string }) {
   );
 }
 
-// X (Twitter) icon component
+// X (Twitter) icon
 function XIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
@@ -32,7 +27,7 @@ function XIcon({ className }: { className?: string }) {
   );
 }
 
-// Telegram icon component  
+// Telegram icon
 function TelegramIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
@@ -41,7 +36,7 @@ function TelegramIcon({ className }: { className?: string }) {
   );
 }
 
-// Instagram icon component
+// Instagram icon
 function InstagramIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -52,23 +47,22 @@ function InstagramIcon({ className }: { className?: string }) {
   );
 }
 
-// Polygon icon component
+// Polygon icon
 function PolygonIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 178 161" fill="currentColor" className={className}>
-      <path d="M133.31,52.42l-31.68-18.31c-4.69-2.71-10.47-2.71-15.16,0l-31.68,18.31c-4.69,2.71-7.58,7.73-7.58,13.15v36.62c0,5.42,2.89,10.44,7.58,13.15l31.68,18.31c4.69,2.71,10.47,2.71,15.16,0l31.68-18.31c4.69-2.71,7.58-7.73,7.58-13.15V65.57C140.89,60.15,138,55.13,133.31,52.42z"/>
+    <svg viewBox="0 0 38.4 33.5" className={className} fill="currentColor">
+      <path d="M29,10.2c-0.7-0.4-1.6-0.4-2.4,0L21,13.5l-3.8,2.1l-5.5,3.3c-0.7,0.4-1.6,0.4-2.4,0l-4.3-2.6c-0.7-0.4-1.2-1.2-1.2-2.1v-5c0-0.8,0.4-1.6,1.2-2.1l4.3-2.5c0.7-0.4,1.6-0.4,2.4,0l4.3,2.6c0.7,0.4,1.2,1.2,1.2,2.1v3.3l3.8-2.2V7c0-0.8-0.4-1.6-1.2-2.1l-8-4.7c-0.7-0.4-1.6-0.4-2.4,0L1.2,5C0.4,5.4,0,6.2,0,7v9.4c0,0.8,0.4,1.6,1.2,2.1l8.1,4.7c0.7,0.4,1.6,0.4,2.4,0l5.5-3.2l3.8-2.2l5.5-3.2c0.7-0.4,1.6-0.4,2.4,0l4.3,2.5c0.7,0.4,1.2,1.2,1.2,2.1v5c0,0.8-0.4,1.6-1.2,2.1l-4.2,2.5c-0.7,0.4-1.6,0.4-2.4,0l-4.3-2.5c-0.7-0.4-1.2-1.2-1.2-2.1v-3.2l-3.8,2.2v3.3c0,0.8,0.4,1.6,1.2,2.1l8.1,4.7c0.7,0.4,1.6,0.4,2.4,0l8.1-4.7c0.7-0.4,1.2-1.2,1.2-2.1V17c0-0.8-0.4-1.6-1.2-2.1L29,10.2z"/>
     </svg>
   );
 }
 
 export default function Home() {
-  const { t } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [email, setEmail] = useState("");
   const [subscribeStatus, setSubscribeStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
-  // Mock presale data (will be replaced with real data on /presale page)
+  // Presale data - will show real data when connected to chain
   const presaleData = {
     currentPhase: 1,
     price: PRESALE_CONFIG.PHASE_1.PRICE,
@@ -133,10 +127,10 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden bg-background">
-      {/* Background Image */}
+    <div className="min-h-screen flex flex-col relative overflow-x-hidden">
+      {/* Background Image - Full screen */}
       <div 
-        className="fixed inset-0 z-0 pointer-events-none"
+        className="fixed inset-0 z-0"
         style={{
           backgroundImage: `url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_2892-ectwXQjeNCvTClnMtgwdEoLpmfMWbD.png')`,
           backgroundSize: 'cover',
@@ -144,32 +138,29 @@ export default function Home() {
           backgroundRepeat: 'no-repeat',
         }}
       />
-      {/* Dark overlay for better text readability */}
-      <div className="fixed inset-0 z-0 bg-black/40 pointer-events-none" />
 
-      {/* Header */}
+      {/* ========== HEADER - Desktop ========== */}
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-          scrolled ? "bg-background/90 backdrop-blur-md py-2" : "bg-transparent py-4"
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 hidden lg:block",
+          scrolled ? "pt-2" : "pt-4"
         )}
       >
-        <div className="mx-auto max-w-7xl w-full px-4">
-          {/* Desktop Header */}
-          <div className="hidden lg:flex items-center justify-between glass-gold rounded-xl px-6 py-3">
+        <div className="mx-auto max-w-[1200px] px-4">
+          <div className="flex items-center justify-between bg-[rgba(10,20,10,0.85)] border border-[#d4af37]/50 rounded-lg px-6 py-3 backdrop-blur-sm">
+            {/* Logo */}
             <Link href="/">
-              <a className="flex items-center gap-2 group">
-                <CloverIcon className="w-8 h-8 text-primary" />
-                <span className="font-display text-xl font-bold text-secondary tracking-wider">
-                  LUBDAN
-                </span>
+              <a className="flex items-center gap-2">
+                <CloverIcon className="w-8 h-8 text-[#2d8a2d]" />
+                <span className="text-xl font-bold text-[#d4af37] tracking-wide">LUBDAN</span>
               </a>
             </Link>
 
-            <nav className="flex items-center gap-6">
+            {/* Nav Items */}
+            <nav className="flex items-center gap-8">
               {navItems.map((item) => (
                 <Link key={item.path} href={item.path}>
-                  <a className="flex items-center gap-1 text-sm font-medium text-foreground/80 hover:text-secondary transition-colors">
+                  <a className="flex items-center gap-1 text-sm text-white/80 hover:text-[#d4af37] transition-colors">
                     {item.label}
                     {item.hasDropdown && <ChevronDown className="w-4 h-4" />}
                   </a>
@@ -177,34 +168,42 @@ export default function Home() {
               ))}
             </nav>
 
-            <div className="flex items-center gap-4">
-              <a href="https://x.com/ludbanlbd" target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-secondary/80 transition-colors">
+            {/* Social + Connect */}
+            <div className="flex items-center gap-5">
+              <a href="https://x.com/ludbanlbd" target="_blank" rel="noopener noreferrer" className="text-[#d4af37] hover:text-[#d4af37]/70 transition-colors">
                 <XIcon className="w-5 h-5" />
               </a>
-              <a href="https://t.me/LubdanOfficial" target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-secondary/80 transition-colors">
+              <a href="https://t.me/LubdanOfficial" target="_blank" rel="noopener noreferrer" className="text-[#d4af37] hover:text-[#d4af37]/70 transition-colors">
                 <TelegramIcon className="w-5 h-5" />
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-secondary/80 transition-colors">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-[#d4af37] hover:text-[#d4af37]/70 transition-colors">
                 <InstagramIcon className="w-5 h-5" />
               </a>
               <Link href="/presale">
-                <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 rounded-lg">
+                <Button className="bg-[#2d8a2d] hover:bg-[#2d8a2d]/90 text-white font-medium px-5 py-2 h-auto rounded-md text-sm">
                   Connect Wallet
                 </Button>
               </Link>
             </div>
           </div>
+        </div>
+      </header>
 
-          {/* Mobile Header */}
-          <div className="lg:hidden flex items-center justify-between glass-gold rounded-xl px-4 py-3">
+      {/* ========== HEADER - Mobile ========== */}
+      <header className={cn(
+        "fixed top-0 left-0 right-0 z-50 lg:hidden transition-all duration-300",
+        scrolled ? "pt-2" : "pt-3"
+      )}>
+        <div className="mx-4">
+          <div className="flex items-center justify-between bg-[rgba(10,20,10,0.9)] border border-[#d4af37]/50 rounded-lg px-4 py-3 backdrop-blur-sm">
             <Link href="/">
               <a className="flex items-center gap-2">
-                <CloverIcon className="w-7 h-7 text-primary" />
-                <span className="font-display text-lg font-bold text-secondary">LUBDAN</span>
+                <CloverIcon className="w-7 h-7 text-[#2d8a2d]" />
+                <span className="text-lg font-bold text-[#d4af37] tracking-wide">LUBDAN</span>
               </a>
             </Link>
             <button 
-              className="text-secondary p-2"
+              className="text-[#d4af37] p-1"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -217,164 +216,171 @@ export default function Home() {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-x-0 top-20 z-40 mx-4 lg:hidden"
+            exit={{ opacity: 0, y: -10 }}
+            className="fixed inset-x-4 top-[72px] z-40 lg:hidden"
           >
-            <div className="glass-gold rounded-xl p-6 flex flex-col gap-4">
-              <div className="flex items-center justify-center gap-4 pb-4 border-b border-secondary/30">
-                <CloverIcon className="w-6 h-6 text-primary" />
-                <a href="https://x.com/ludbanlbd" target="_blank" rel="noopener noreferrer" className="text-secondary">
+            <div className="bg-[rgba(10,20,10,0.95)] border border-[#d4af37]/50 rounded-lg p-4 backdrop-blur-sm">
+              {/* Top bar with icons */}
+              <div className="flex items-center justify-center gap-4 pb-4 border-b border-[#d4af37]/30">
+                <CloverIcon className="w-6 h-6 text-[#2d8a2d]" />
+                <a href="https://x.com/ludbanlbd" target="_blank" rel="noopener noreferrer" className="text-[#d4af37]">
                   <XIcon className="w-5 h-5" />
                 </a>
-                <a href="https://t.me/LubdanOfficial" target="_blank" rel="noopener noreferrer" className="text-secondary">
+                <a href="https://t.me/LubdanOfficial" target="_blank" rel="noopener noreferrer" className="text-[#d4af37]">
                   <TelegramIcon className="w-5 h-5" />
                 </a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-secondary">
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-[#d4af37]">
                   <InstagramIcon className="w-5 h-5" />
                 </a>
                 <Link href="/presale">
-                  <Button size="sm" className="bg-primary text-primary-foreground text-xs px-3">
+                  <Button size="sm" className="bg-[#2d8a2d] text-white text-xs px-3 h-8 rounded">
                     Connect
                   </Button>
                 </Link>
               </div>
-              {navItems.map((item) => (
-                <Link key={item.path} href={item.path}>
-                  <a 
-                    className="text-lg font-medium text-foreground/90 hover:text-secondary py-2"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.label}
-                  </a>
-                </Link>
-              ))}
+              {/* Nav links */}
+              <div className="pt-4 flex flex-col gap-3">
+                {navItems.map((item) => (
+                  <Link key={item.path} href={item.path}>
+                    <a 
+                      className="text-base text-white/90 hover:text-[#d4af37] py-2"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.label}
+                    </a>
+                  </Link>
+                ))}
+              </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Main Content */}
-      <main className="flex-grow relative z-10 pt-28 lg:pt-32 px-4">
-        <div className="max-w-7xl mx-auto">
-          {/* Hero Section */}
-          <section className="min-h-[60vh] lg:min-h-[70vh] flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-            {/* Hero Text - positioned to right on desktop, center on mobile */}
-            <div className="w-full lg:w-1/2 lg:ml-auto order-1 lg:order-2 text-center lg:text-left">
+      {/* ========== MAIN CONTENT ========== */}
+      <main className="flex-grow relative z-10 pt-24 lg:pt-28 px-4">
+        <div className="max-w-[1200px] mx-auto">
+          
+          {/* ===== HERO SECTION ===== */}
+          <section className="min-h-[50vh] lg:min-h-[55vh] flex items-center">
+            <div className="w-full lg:w-1/2 lg:ml-auto text-center lg:text-left">
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.5 }}
               >
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight mb-4">
-                  <span className="text-secondary italic">Where Strategy Meets Luck</span>
+                {/* Title - Serif italic gold */}
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-[56px] leading-tight mb-4">
+                  <span className="text-[#d4af37]" style={{ fontFamily: "'Playfair Display', serif", fontStyle: 'italic' }}>
+                    Where Strategy Meets Luck
+                  </span>
                 </h1>
                 
-                <p className="text-lg md:text-xl text-foreground/80 mb-8 max-w-lg mx-auto lg:mx-0">
+                {/* Subtitle */}
+                <p className="text-base sm:text-lg lg:text-xl text-white/80 mb-8 max-w-md mx-auto lg:mx-0">
                   A long-term Polygon project with real MATIC dividends.
                 </p>
 
-                {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-8">
+                {/* CTA Buttons - 3 in a row on desktop, stacked on mobile */}
+                <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
                   <Link href="/presale">
-                    <Button className="glass-gold hover:bg-primary/20 text-foreground font-semibold px-8 py-6 rounded-lg border border-secondary/50 transition-all w-full sm:w-auto">
-                      Join Presale <ArrowRight className="ml-2 w-4 h-4" />
-                    </Button>
+                    <button className="w-full sm:w-auto px-6 py-3 bg-[rgba(15,25,15,0.8)] border border-[#d4af37]/60 rounded-lg text-white font-medium hover:bg-[rgba(25,40,25,0.9)] transition-colors flex items-center justify-center gap-2">
+                      Join Presale <ArrowRight className="w-4 h-4" />
+                    </button>
                   </Link>
-                  <a href="https://global.transak.com/" target="_blank" rel="noopener noreferrer">
-                    <Button className="glass-gold hover:bg-primary/20 text-foreground font-semibold px-8 py-6 rounded-lg border border-secondary/50 transition-all w-full sm:w-auto">
-                      Buy with Card <ArrowRight className="ml-2 w-4 h-4" />
-                    </Button>
+                  <a href="https://global.transak.com/" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+                    <button className="w-full px-6 py-3 bg-[rgba(15,25,15,0.8)] border border-[#d4af37]/60 rounded-lg text-white font-medium hover:bg-[rgba(25,40,25,0.9)] transition-colors flex items-center justify-center gap-2">
+                      Buy with Card <ArrowRight className="w-4 h-4" />
+                    </button>
                   </a>
                   <Link href="/whitepaper">
-                    <Button className="glass-gold hover:bg-primary/20 text-foreground font-semibold px-8 py-6 rounded-lg border border-secondary/50 transition-all w-full sm:w-auto">
-                      Read Whitepaper <ArrowRight className="ml-2 w-4 h-4" />
-                    </Button>
+                    <button className="w-full sm:w-auto px-6 py-3 bg-[rgba(15,25,15,0.8)] border border-[#d4af37]/60 rounded-lg text-white font-medium hover:bg-[rgba(25,40,25,0.9)] transition-colors flex items-center justify-center gap-2">
+                      Read Whitepaper <ArrowRight className="w-4 h-4" />
+                    </button>
                   </Link>
                 </div>
               </motion.div>
             </div>
-
-            {/* Mascot area - on mobile this is handled by background */}
-            <div className="hidden lg:block w-1/2 order-1">
-              {/* Mascot is in the background image */}
-            </div>
           </section>
 
-          {/* Stats Cards */}
-          <section className="py-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {/* ===== STATS CARDS ===== */}
+          <section className="py-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              {/* Current Phase */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="stats-card rounded-xl p-6"
+                className="bg-[rgba(15,25,15,0.85)] border border-[#d4af37]/50 rounded-lg p-5"
               >
-                <p className="text-sm text-muted-foreground mb-1">Current Phase:</p>
-                <p className="text-2xl font-display font-bold text-foreground">
-                  Phase {presaleData.currentPhase} - <span className="text-secondary">${presaleData.price.toFixed(2)}</span>
+                <p className="text-sm text-white/60 mb-1">Current Phase:</p>
+                <p className="text-xl font-display font-semibold text-white">
+                  Phase {presaleData.currentPhase} - <span className="text-[#d4af37]">${presaleData.price.toFixed(2)}</span>
                 </p>
               </motion.div>
 
+              {/* LBD Sold */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.15 }}
+                className="bg-[rgba(15,25,15,0.85)] border border-[#d4af37]/50 rounded-lg p-5"
+              >
+                <p className="text-sm text-white/60 mb-1">LBD Sold:</p>
+                <p className="text-xl font-display font-semibold">
+                  <span className="text-[#d4af37]">{formatNumber(presaleData.totalSold)}</span>
+                  <span className="text-white/70 text-base ml-1">LBD</span>
+                </p>
+              </motion.div>
+
+              {/* Phase 1 Remaining */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="stats-card rounded-xl p-6"
+                className="bg-[rgba(15,25,15,0.85)] border border-[#d4af37]/50 rounded-lg p-5"
               >
-                <p className="text-sm text-muted-foreground mb-1">LBD Sold:</p>
-                <p className="text-2xl font-display font-bold">
-                  <span className="text-secondary">{formatNumber(presaleData.totalSold)}</span>
-                  <span className="text-foreground/70 text-lg ml-1">LBD</span>
+                <p className="text-sm text-white/60 mb-1">Phase 1 Remaining:</p>
+                <p className="text-xl font-display font-semibold">
+                  <span className="text-[#d4af37]">{formatNumber(presaleData.phase1Remaining)}</span>
+                  <span className="text-white/70 text-base ml-1">LBD</span>
                 </p>
               </motion.div>
 
+              {/* Phase 2 Remaining */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="stats-card rounded-xl p-6"
+                transition={{ delay: 0.25 }}
+                className="bg-[rgba(15,25,15,0.85)] border border-[#d4af37]/50 rounded-lg p-5"
               >
-                <p className="text-sm text-muted-foreground mb-1">Phase 1 Remaining:</p>
-                <p className="text-2xl font-display font-bold">
-                  <span className="text-secondary">{formatNumber(presaleData.phase1Remaining)}</span>
-                  <span className="text-foreground/70 text-lg ml-1">LBD</span>
-                </p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="stats-card rounded-xl p-6"
-              >
-                <p className="text-sm text-muted-foreground mb-1">Phase 2 Remaining:</p>
-                <p className="text-2xl font-display font-bold">
-                  <span className="text-secondary">{formatNumber(presaleData.phase2Remaining)}</span>
-                  <span className="text-foreground/70 text-lg ml-1">LBD</span>
+                <p className="text-sm text-white/60 mb-1">Phase 2 Remaining:</p>
+                <p className="text-xl font-display font-semibold">
+                  <span className="text-[#d4af37]">{formatNumber(presaleData.phase2Remaining)}</span>
+                  <span className="text-white/70 text-base ml-1">LBD</span>
                 </p>
               </motion.div>
             </div>
           </section>
 
-          {/* Bottom Section - Dividends + Subscribe */}
-          <section className="py-8 grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {/* ===== BOTTOM SECTION - Dividends + Subscribe ===== */}
+          <section className="py-6 grid grid-cols-1 lg:grid-cols-2 gap-3">
             {/* Earn MATIC Dividends */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -15 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5 }}
-              className="glass-gold rounded-xl p-6 flex items-center gap-6"
+              transition={{ delay: 0.3 }}
+              className="bg-[rgba(15,25,15,0.85)] border border-[#d4af37]/50 rounded-lg p-5 flex items-center gap-5"
             >
-              <div className="w-16 h-16 rounded-xl bg-purple-600/20 flex items-center justify-center flex-shrink-0">
-                <PolygonIcon className="w-10 h-10 text-purple-400" />
+              <div className="w-14 h-14 rounded-lg bg-[#8247e5]/20 flex items-center justify-center flex-shrink-0">
+                <PolygonIcon className="w-9 h-9 text-[#8247e5]" />
               </div>
               <div>
-                <h3 className="text-xl font-display font-bold text-foreground mb-1">
+                <h3 className="text-lg font-display font-semibold text-white mb-1">
                   Earn MATIC Dividends
                 </h3>
-                <div className="flex items-center gap-2 text-muted-foreground">
+                <div className="flex items-center gap-2 text-white/60 text-sm">
                   <PolygonIcon className="w-4 h-4" />
                   <span>Polygon</span>
                 </div>
@@ -383,12 +389,12 @@ export default function Home() {
 
             {/* Subscribe for Updates */}
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 0, x: 15 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6 }}
-              className="glass-gold rounded-xl p-6"
+              transition={{ delay: 0.35 }}
+              className="bg-[rgba(15,25,15,0.85)] border border-[#d4af37]/50 rounded-lg p-5"
             >
-              <h3 className="text-xl font-display font-bold text-foreground mb-4">
+              <h3 className="text-lg font-display font-semibold text-white mb-3">
                 Subscribe for Updates
               </h3>
               <form onSubmit={handleSubscribe} className="flex gap-2">
@@ -398,12 +404,12 @@ export default function Home() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   disabled={subscribeStatus === "loading"}
-                  className="flex-1 bg-background/50 border-secondary/30 text-foreground placeholder:text-muted-foreground/50"
+                  className="flex-1 bg-[rgba(10,15,10,0.6)] border-[#d4af37]/30 text-white placeholder:text-white/40 h-10"
                 />
                 <Button 
                   type="submit"
                   disabled={subscribeStatus === "loading" || subscribeStatus === "success"}
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6"
+                  className="bg-[#2d8a2d] hover:bg-[#2d8a2d]/90 text-white font-medium px-5 h-10 rounded-md text-sm"
                 >
                   {subscribeStatus === "loading" ? "..." : subscribeStatus === "success" ? "Done!" : "Subscribe"}
                   {subscribeStatus === "idle" && <ArrowRight className="ml-1 w-4 h-4" />}
@@ -412,27 +418,27 @@ export default function Home() {
             </motion.div>
           </section>
 
-          {/* Footer */}
-          <footer className="py-8 text-center border-t border-secondary/20 mt-8">
-            <p className="text-muted-foreground">
-              Support: <a href="mailto:lubdan.info@gmail.com" className="text-secondary hover:underline">lubdan.info@gmail.com</a>
+          {/* ===== FOOTER ===== */}
+          <footer className="py-6 text-center border-t border-[#d4af37]/20 mt-4">
+            <p className="text-white/60 text-sm">
+              Support: <a href="mailto:lubdan.info@gmail.com" className="text-[#d4af37] hover:underline">lubdan.info@gmail.com</a>
             </p>
           </footer>
         </div>
       </main>
 
-      {/* Floating Telegram Button */}
+      {/* ===== FLOATING TELEGRAM BUTTON ===== */}
       <motion.a
         href="https://t.me/LubdanOfficial"
         target="_blank"
         rel="noopener noreferrer"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 1 }}
-        whileHover={{ scale: 1.1 }}
-        className="fixed bottom-8 right-8 z-50 w-16 h-16 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 shadow-lg shadow-blue-500/30 flex items-center justify-center"
+        transition={{ delay: 0.8 }}
+        whileHover={{ scale: 1.05 }}
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-[#3ab4f2] to-[#0088cc] shadow-lg shadow-blue-500/30 flex items-center justify-center"
       >
-        <TelegramIcon className="w-8 h-8 text-white" />
+        <TelegramIcon className="w-7 h-7 text-white" />
       </motion.a>
     </div>
   );
