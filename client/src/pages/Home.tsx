@@ -4,9 +4,9 @@ import { ArrowRight, ShieldCheck, TrendingUp, Coins, Zap } from "lucide-react";
 import { Link } from "wouter";
 import { Suspense, lazy } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import Mascot3D from "@/components/Mascot3D";
 
-// Lazy load heavy components
-const Mascot3D = lazy(() => import("@/components/Mascot3D"));
+// Lazy load non-critical components
 const Newsletter = lazy(() => import("@/components/Newsletter"));
 const ListedOn = lazy(() => import("@/components/ListedOn"));
 
@@ -23,10 +23,7 @@ export default function Home() {
         <div className="container grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8 z-10">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
-              </span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
               {t('home.hero.presale_live').replace('{phase}', currentPhase.toString())}
             </div>
             
@@ -103,9 +100,7 @@ export default function Home() {
               </div>
             </div>
             
-            <Suspense fallback={<div className="w-full h-96" />}>
-              <Mascot3D />
-            </Suspense>
+            <Mascot3D />
           </div>
         </div>
       </section>

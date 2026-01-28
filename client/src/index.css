@@ -168,10 +168,7 @@
   
   /* Premium Button Styles */
   button, [role="button"] {
-    @apply transition-all duration-300;
-  }
-  button:hover:not(:disabled) {
-    @apply scale-105 shadow-lg;
+    @apply transition-colors duration-200;
   }
 }
 

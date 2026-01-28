@@ -39,11 +39,18 @@ export default defineConfig({
           if (id.includes('node_modules/html2canvas')) return 'canvas';
           if (id.includes('node_modules/recharts')) return 'charts';
         },
+        assetFileNames: (assetInfo) => {
+          const info = assetInfo.name.split('.');
+          const ext = info[info.length - 1];
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico|avif|webp/i.test(ext)) {
+            return `assets/images/[name]-[hash][extname]`;
+          }
+          return `assets/[name]-[hash][extname]`;
+        },
       },
     },
     chunkSizeWarningLimit: 1000,
     reportCompressedSize: false,
-
   },
   server: {
     port: 3000,
