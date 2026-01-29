@@ -26,40 +26,56 @@ export default defineConfig({
     target: "es2020",
     minify: "esbuild",
     sourcemap: false,
-    cssCodeSplit: false,
+    cssCodeSplit: true,
     rollupOptions: {
       output: {
         manualChunks: (id) => {
-          // Core React
+          // Core React - CRITICAL for initial load
           if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) return 'react';
           if (id.includes('node_modules/scheduler')) return 'react';
           
-          // Router
+          // Router - needed for navigation
           if (id.includes('node_modules/wouter')) return 'router';
           
-          // Web3 (lazy loaded)
-          if (id.includes('node_modules/wagmi')) return 'wagmi';
-          if (id.includes('node_modules/viem')) return 'wagmi';
-          if (id.includes('node_modules/@wagmi')) return 'wagmi';
+          // Query client - needed for data fetching
+          if (id.includes('node_modules/@tanstack/react-query')) return 'query';
           
-          // UI Components
-          if (id.includes('node_modules/@radix-ui')) return 'ui';
-          if (id.includes('node_modules/lucide-react')) return 'icons';
+          // Web3 (lazy loaded - NOT in home bundle)
+          if (id.includes('node_modules/wagmi')) return 'web3-wagmi';
+          if (id.includes('node_modules/viem')) return 'web3-viem';
+          if (id.includes('node_modules/@wagmi')) return 'web3-wagmi';
+          if (id.includes('node_modules/ethers')) return 'web3-ethers';
+          if (id.includes('node_modules/@web3-react')) return 'web3-react';
+          if (id.includes('node_modules/web3')) return 'web3';
           
-          // Animations (lazy loaded)
-          if (id.includes('node_modules/framer-motion')) return 'framer';
+          // UI Components - split for better caching
+          if (id.includes('node_modules/@radix-ui')) return 'ui-radix';
+          if (id.includes('node_modules/lucide-react')) return 'ui-icons';
           
-          // PDF (lazy loaded)
-          if (id.includes('node_modules/html2pdf')) return 'pdf';
-          if (id.includes('node_modules/html2canvas')) return 'canvas';
-          if (id.includes('node_modules/jspdf')) return 'pdf';
+          // Animations (lazy loaded - NOT in home bundle)
+          if (id.includes('node_modules/framer-motion')) return 'animation-framer';
           
-          // Charts (lazy loaded)
-          if (id.includes('node_modules/recharts')) return 'charts';
-          if (id.includes('node_modules/d3-')) return 'charts';
+          // PDF (lazy loaded - NOT in home bundle)
+          if (id.includes('node_modules/html2pdf')) return 'pdf-html2pdf';
+          if (id.includes('node_modules/html2canvas')) return 'pdf-canvas';
+          if (id.includes('node_modules/jspdf')) return 'pdf-jspdf';
+          if (id.includes('node_modules/pdfjs-dist')) return 'pdf-pdfjs';
           
-          // Other vendor code
-          if (id.includes('node_modules/')) return 'vendor';
+          // Charts (lazy loaded - NOT in home bundle)
+          if (id.includes('node_modules/recharts')) return 'charts-recharts';
+          if (id.includes('node_modules/d3-')) return 'charts-d3';
+          if (id.includes('node_modules/chart.js')) return 'charts-chartjs';
+          
+          // Utilities
+          if (id.includes('node_modules/date-fns')) return 'utils-date';
+          if (id.includes('node_modules/clsx')) return 'utils-clsx';
+          
+          // Other vendor code - split to avoid monolithic bundle
+          if (id.includes('node_modules/')) {
+            if (id.includes('node_modules/axios') || id.includes('node_modules/ky')) return 'vendor-http';
+            if (id.includes('node_modules/zod')) return 'vendor-validation';
+            return 'vendor';
+          }
         },
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name.split('.');

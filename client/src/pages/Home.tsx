@@ -4,9 +4,9 @@ import { ArrowRight, ShieldCheck, TrendingUp, Coins, Zap } from "lucide-react";
 import { Link } from "wouter";
 import { Suspense, lazy } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import Mascot3D from "@/components/Mascot3D";
 
 // Lazy load non-critical components
+const Mascot3D = lazy(() => import("@/components/Mascot3D"));
 const Newsletter = lazy(() => import("@/components/Newsletter"));
 const ListedOn = lazy(() => import("@/components/ListedOn"));
 
@@ -100,7 +100,9 @@ export default function Home() {
               </div>
             </div>
             
-            <Mascot3D />
+            <Suspense fallback={<div className="w-full h-96" />}>
+              <Mascot3D />
+            </Suspense>
           </div>
         </div>
       </section>
