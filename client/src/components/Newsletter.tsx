@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Mail, CheckCircle, AlertCircle } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { safeStorage } from "@/lib/storage";
 
@@ -70,12 +69,7 @@ export default function Newsletter() {
       <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-secondary/5" />
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-2xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
+          <div>
             <div className="flex items-center justify-center gap-3 mb-6">
               <div className="p-3 rounded-lg bg-primary/10">
                 <Mail className="h-6 w-6 text-primary" />
@@ -107,35 +101,23 @@ export default function Newsletter() {
               </Button>
             </form>
 
-            <AnimatePresence>
-              {status === "success" && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="mt-4 flex items-center justify-center gap-2 text-green-400"
-                >
-                  <CheckCircle size={20} />
-                  <span>{message}</span>
-                </motion.div>
-              )}
-              {status === "error" && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="mt-4 flex items-center justify-center gap-2 text-red-400"
-                >
-                  <AlertCircle size={20} />
-                  <span>{message}</span>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {status === "success" && (
+              <div className="mt-4 flex items-center justify-center gap-2 text-green-400 transition-opacity duration-300">
+                <CheckCircle size={20} />
+                <span>{message}</span>
+              </div>
+            )}
+            {status === "error" && (
+              <div className="mt-4 flex items-center justify-center gap-2 text-red-400 transition-opacity duration-300">
+                <AlertCircle size={20} />
+                <span>{message}</span>
+              </div>
+            )}
 
             <p className="text-xs text-muted-foreground/70 mt-6">
               {t('home.newsletter.privacy')}
             </p>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
