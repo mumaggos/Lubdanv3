@@ -64,6 +64,79 @@ const prerenderedHtml = `<!DOCTYPE html>
             background-color: var(--background);
             color: var(--foreground);
             line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Background layers */
+        .bg {
+            position: fixed;
+            inset: 0;
+            z-index: -10;
+            overflow: hidden;
+            background-color: var(--background);
+        }
+        
+        .bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(139, 92, 246, 0.1) 0%, var(--background) 100%);
+            pointer-events: none;
+        }
+        
+        .bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .bg-grid {
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+            background-image: 
+                linear-gradient(0deg, transparent 24%, rgba(139, 92, 246, 0.05) 25%, rgba(139, 92, 246, 0.05) 26%, transparent 27%, transparent 74%, rgba(139, 92, 246, 0.05) 75%, rgba(139, 92, 246, 0.05) 76%, transparent 77%, transparent),
+                linear-gradient(90deg, transparent 24%, rgba(139, 92, 246, 0.05) 25%, rgba(139, 92, 246, 0.05) 26%, transparent 27%, transparent 74%, rgba(139, 92, 246, 0.05) 75%, rgba(139, 92, 246, 0.05) 76%, transparent 77%, transparent);
+            background-size: 50px 50px;
+            pointer-events: none;
+        }
+        
+        .bg-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.08;
+            pointer-events: none;
+        }
+        
+        .bg-blob-1 {
+            top: -200px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        .bg-blob-2 {
+            bottom: -200px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
+            animation: float 25s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            .bg-blob { animation: none !important; }
         }
         
         .container {
@@ -235,6 +308,13 @@ const prerenderedHtml = `<!DOCTYPE html>
             </div>
         </div>
     </header>
+
+    <!-- Background layers (CSS only, no JS) -->
+    <div class="bg">
+        <div class="bg-grid"></div>
+        <div class="bg-blob bg-blob-1"></div>
+        <div class="bg-blob bg-blob-2"></div>
+    </div>
 
     <main>
         <div class="container">
