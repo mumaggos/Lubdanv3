@@ -6,7 +6,6 @@ import { Suspense, lazy } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 // Lazy load non-critical components
-const Mascot3D = lazy(() => import("@/components/Mascot3D"));
 const Newsletter = lazy(() => import("@/components/Newsletter"));
 const ListedOn = lazy(() => import("@/components/ListedOn"));
 
