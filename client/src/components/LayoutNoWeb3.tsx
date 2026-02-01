@@ -33,11 +33,24 @@ export default function LayoutNoWeb3({ children }: { children: React.ReactNode }
 
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="fixed inset-0 z-[-1] pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/background.avif')] bg-cover bg-center opacity-20 mix-blend-overlay" />
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[100px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary/10 rounded-full blur-[100px]" />
+      {/* Ultra-light background: CSS gradients only (no images) */}
+      <div className="fixed inset-0 z-[-1] pointer-events-none bg-background">
+        {/* Base gradient: purple/blue top → dark bottom */}
+        <div className="absolute inset-0 bg-gradient-to-b from-purple-950/20 via-background to-background" />
+        
+        {/* Radial glow: subtle purple center */}
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'radial-gradient(circle at 50% 30%, rgba(139, 92, 246, 0.1) 0%, transparent 60%)',
+        }} />
+        
+        {/* Subtle grid: CSS-only pattern */}
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
+            linear-gradient(0deg, transparent 24%, rgba(139, 92, 246, 0.02) 25%, rgba(139, 92, 246, 0.02) 26%, transparent 27%, transparent 74%, rgba(139, 92, 246, 0.02) 75%, rgba(139, 92, 246, 0.02) 76%, transparent 77%, transparent),
+            linear-gradient(90deg, transparent 24%, rgba(139, 92, 246, 0.02) 25%, rgba(139, 92, 246, 0.02) 26%, transparent 27%, transparent 74%, rgba(139, 92, 246, 0.02) 75%, rgba(139, 92, 246, 0.02) 76%, transparent 77%, transparent)
+          `,
+          backgroundSize: '60px 60px',
+        }} />
       </div>
 
       {/* Header */}

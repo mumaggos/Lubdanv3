@@ -41,9 +41,6 @@ const prerenderedHtml = `<!DOCTYPE html>
     <link rel="preload" href="/images/leprechaun-lubdan-transparent.avif" as="image" type="image/avif" fetchpriority="high">
     <link rel="preload" href="/images/token.avif" as="image" type="image/avif">
     
-    <!-- Prefetch non-critical assets -->
-    <link rel="prefetch" href="/images/background.avif" as="image" type="image/avif">
-    
     <style>
         :root {
             --background: #1B1026;
@@ -68,75 +65,37 @@ const prerenderedHtml = `<!DOCTYPE html>
             overflow-x: hidden;
         }
         
-        /* Background layers */
-        .bg {
+        /* Ultra-light background: CSS gradients only (no images) */
+        .bg-container {
             position: fixed;
             inset: 0;
-            z-index: -10;
-            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
             background-color: var(--background);
         }
         
-        .bg::before {
-            content: '';
+        /* Base gradient: purple/blue top → dark bottom */
+        .bg-gradient-base {
             position: absolute;
             inset: 0;
             background: linear-gradient(to bottom, rgba(139, 92, 246, 0.1) 0%, var(--background) 100%);
-            pointer-events: none;
         }
         
-        .bg::after {
-            content: '';
+        /* Radial glow: subtle purple center */
+        .bg-radial-glow {
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
-            pointer-events: none;
+            background-image: radial-gradient(circle at 50% 30%, rgba(139, 92, 246, 0.1) 0%, transparent 60%);
         }
         
-        .bg-grid {
+        /* Subtle grid: CSS-only pattern */
+        .bg-grid-pattern {
             position: absolute;
             inset: 0;
-            opacity: 0.03;
             background-image: 
-                linear-gradient(0deg, transparent 24%, rgba(139, 92, 246, 0.05) 25%, rgba(139, 92, 246, 0.05) 26%, transparent 27%, transparent 74%, rgba(139, 92, 246, 0.05) 75%, rgba(139, 92, 246, 0.05) 76%, transparent 77%, transparent),
-                linear-gradient(90deg, transparent 24%, rgba(139, 92, 246, 0.05) 25%, rgba(139, 92, 246, 0.05) 26%, transparent 27%, transparent 74%, rgba(139, 92, 246, 0.05) 75%, rgba(139, 92, 246, 0.05) 76%, transparent 77%, transparent);
-            background-size: 50px 50px;
-            pointer-events: none;
-        }
-        
-        .bg-blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.08;
-            pointer-events: none;
-        }
-        
-        .bg-blob-1 {
-            top: -200px;
-            left: -100px;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, transparent 70%);
-            animation: float 20s ease-in-out infinite;
-        }
-        
-        .bg-blob-2 {
-            bottom: -200px;
-            right: -100px;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
-            animation: float 25s ease-in-out infinite reverse;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-30px); }
-        }
-        
-        @media (prefers-reduced-motion: reduce) {
-            .bg-blob { animation: none !important; }
+                linear-gradient(0deg, transparent 24%, rgba(139, 92, 246, 0.02) 25%, rgba(139, 92, 246, 0.02) 26%, transparent 27%, transparent 74%, rgba(139, 92, 246, 0.02) 75%, rgba(139, 92, 246, 0.02) 76%, transparent 77%, transparent),
+                linear-gradient(90deg, transparent 24%, rgba(139, 92, 246, 0.02) 25%, rgba(139, 92, 246, 0.02) 26%, transparent 27%, transparent 74%, rgba(139, 92, 246, 0.02) 75%, rgba(139, 92, 246, 0.02) 76%, transparent 77%, transparent);
+            background-size: 60px 60px;
         }
         
         .container {
@@ -308,14 +267,12 @@ const prerenderedHtml = `<!DOCTYPE html>
             </div>
         </div>
     </header>
-
-    <!-- Background layers (CSS only, no JS) -->
-    <div class="bg">
-        <div class="bg-grid"></div>
-        <div class="bg-blob bg-blob-1"></div>
-        <div class="bg-blob bg-blob-2"></div>
+    <!-- Ultra-light background: CSS gradients only (no images) -->
+    <div class="bg-container">
+        <div class="bg-gradient-base"></div>
+        <div class="bg-radial-glow"></div>
+        <div class="bg-grid-pattern"></div>
     </div>
-
     <main>
         <div class="container">
             <section class="hero">
@@ -359,34 +316,17 @@ const prerenderedHtml = `<!DOCTYPE html>
             </section>
         </div>
     </main>
-
     <noscript>
         <div class="noscript">
             <strong>JavaScript é necessário para funcionalidades avançadas.</strong> A página está visível, mas algumas features podem não funcionar. <a href="#" style="color: var(--primary);">Ativar JavaScript</a> para melhor experiência.
         </div>
     </noscript>
-
-    <script>
-        // Add scroll listener for header
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('header');
-            if (window.scrollY > 20) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-    </script>
-    
-    <!-- React App (hydration) -->
     <div id="root"></div>
     <script type="module" src="/assets/index-Dj7fEVPw.js"></script>
 </body>
 </html>`;
-
 // Write the pre-rendered HTML
 fs.writeFileSync(indexPath, prerenderedHtml, 'utf-8');
-
 console.log('✅ Pre-rendered HOME HTML generated successfully!');
 console.log(`📄 File: ${indexPath}`);
 console.log('✨ HTML now contains hero, CTA, and images for better FCP/LCP');
