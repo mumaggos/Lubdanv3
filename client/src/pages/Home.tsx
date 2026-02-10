@@ -6,7 +6,6 @@ import { Suspense, lazy } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 // Lazy load non-critical components
-const Mascot3D = lazy(() => import("@/components/Mascot3D"));
 const Newsletter = lazy(() => import("@/components/Newsletter"));
 const ListedOn = lazy(() => import("@/components/ListedOn"));
 
@@ -99,10 +98,6 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            
-            <Suspense fallback={<div className="w-full h-96" />}>
-              <Mascot3D />
-            </Suspense>
           </div>
         </div>
       </section>
@@ -143,17 +138,6 @@ export default function Home() {
               <p className="text-lg text-muted-foreground leading-relaxed">
                 {t('home.what_is.desc2')}
               </p>
-            </div>
-            <div className="relative h-[400px] rounded-2xl overflow-hidden border border-primary/20 shadow-2xl glass-card">
-              <picture>
-                <source srcSet="/images/lubdan-treasure.avif" type="image/avif" />
-                <img 
-                  src="/images/lubdan-treasure.png" 
-                  alt="Lubdan Treasure" 
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </picture>
             </div>
           </div>
         </div>
